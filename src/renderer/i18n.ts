@@ -7,7 +7,7 @@ export type MessageSchema = typeof en
 
 const messages = {
   en,
-  de
+  de,
 }
 
 // Get saved language from localStorage or default to browser language
@@ -16,13 +16,13 @@ const getDefaultLocale = (): string => {
   if (savedLocale && Object.keys(messages).includes(savedLocale)) {
     return savedLocale
   }
-  
+
   // Check browser language
   const browserLocale = navigator.language.split('-')[0]
   if (Object.keys(messages).includes(browserLocale)) {
     return browserLocale
   }
-  
+
   // Default to English
   return 'en'
 }
@@ -32,19 +32,19 @@ export const i18n = createI18n({
   fallbackLocale: 'en',
   legacy: false,
   globalInjection: true,
-  messages
+  messages,
 })
 
 // Function to change language and persist in localStorage
 export const setLocale = (locale: string) => {
-  (i18n.global.locale as any).value = locale
+  i18n.global.locale.value = locale as 'en' | 'de'
   localStorage.setItem('privlix-locale', locale)
   document.documentElement.lang = locale
 }
 
 // Get current locale
 export const getCurrentLocale = (): string => {
-  return (i18n.global.locale as any).value
+  return i18n.global.locale.value
 }
 
 // Get available locales

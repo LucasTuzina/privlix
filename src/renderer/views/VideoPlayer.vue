@@ -7,32 +7,32 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  id?: string
-}
+  interface Props {
+    id?: string
+  }
 
-defineProps<Props>()
+  defineProps<Props>()
 </script>
 
 <style scoped>
-.video-player {
-  padding: 40px;
-  text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
+  .video-player {
+    padding: 40px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
 
-h1 {
-  color: #ffffff;
-  font-size: 32px;
-}
+  h1 {
+    color: #ffffff;
+    font-size: 32px;
+  }
 
-p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 18px;
-}
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+  }
 </style>

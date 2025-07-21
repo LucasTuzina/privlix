@@ -46,7 +46,7 @@
   "stats": {
     "movies": "Movies",
     "series": "Series",
-    "episodes": "Episodes", 
+    "episodes": "Episodes",
     "totalFiles": "Total Files",
     "totalSize": "Total Size"
   },

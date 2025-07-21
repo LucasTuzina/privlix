@@ -13,24 +13,24 @@ const routes: RouteRecordRaw[] = [
     name: 'Home',
     component: Home,
     meta: {
-      title: 'nav.home'
-    }
+      title: 'nav.home',
+    },
   },
   {
     path: '/search',
     name: 'Search',
     component: Search,
     meta: {
-      title: 'nav.search'
-    }
+      title: 'nav.search',
+    },
   },
   {
     path: '/settings',
     name: 'Settings',
     component: Settings,
     meta: {
-      title: 'nav.settings'
-    }
+      title: 'nav.settings',
+    },
   },
   {
     path: '/player/:id',
@@ -39,14 +39,14 @@ const routes: RouteRecordRaw[] = [
     props: true,
     meta: {
       title: 'videoPlayer.title',
-      hideNavigation: true
-    }
+      hideNavigation: true,
+    },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    redirect: '/'
-  }
+    redirect: '/',
+  },
 ]
 
 export const router = createRouter({
@@ -59,7 +59,7 @@ export const router = createRouter({
     } else {
       return { top: 0 }
     }
-  }
+  },
 })
 
 // Navigation guards
@@ -69,7 +69,7 @@ router.beforeEach((to, _from, next) => {
     // Title will be handled by i18n in the component
     document.title = `Privlix - ${to.meta.title}`
   }
-  
+
   next()
 })
 

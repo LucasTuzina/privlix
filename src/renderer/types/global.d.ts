@@ -16,11 +16,11 @@ declare global {
       getMediaStats: () => Promise<any>
       searchMedia: (query: string) => Promise<any[]>
       getRecentlyWatched: () => Promise<any[]>
-      
+
       // Playback
       updateWatchProgress: (mediaId: string, progress: number, timestamp: number) => Promise<void>
       getVideoInfo: (filePath: string) => Promise<any>
-      
+
       // File system
       getFilePath: (filePath: string) => string
       getThumbnailPath: (thumbnailPath: string | null) => string | null

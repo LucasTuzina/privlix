@@ -3,19 +3,19 @@ export const appConfig = {
   name: 'Privlix',
   version: '1.0.0',
   description: 'Your Private Media Library',
-  
+
   // Environment settings
   development: {
     performance: true,
     devtools: true,
-    logLevel: 'debug'
+    logLevel: 'debug',
   },
-  
+
   production: {
     performance: false,
     devtools: false,
-    logLevel: 'error'
-  }
+    logLevel: 'error',
+  },
 } as const
 
 // Get environment-specific configuration

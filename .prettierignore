@@ -1,0 +1,17 @@
+node_modules/
+dist/
+release/
+coverage/
+.git/
+*.log
+*.pid
+*.seed
+*.pid.lock
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.*.local
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

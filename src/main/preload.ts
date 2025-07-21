@@ -8,16 +8,16 @@ const electronAPI = {
   getMediaStats: () => ipcRenderer.invoke('get-media-stats'),
   searchMedia: (query: string) => ipcRenderer.invoke('search-media', query),
   getRecentlyWatched: () => ipcRenderer.invoke('get-recently-watched'),
-  
+
   // Playback
-  updateWatchProgress: (mediaId: string, progress: number, timestamp: number) => 
+  updateWatchProgress: (mediaId: string, progress: number, timestamp: number) =>
     ipcRenderer.invoke('update-watch-progress', mediaId, progress, timestamp),
   getVideoInfo: (filePath: string) => ipcRenderer.invoke('get-video-info', filePath),
-  
+
   // File system
   getFilePath: (filePath: string) => `file://${filePath}`,
-  getThumbnailPath: (thumbnailPath: string | null) => 
-    thumbnailPath ? `file://${thumbnailPath}` : null
+  getThumbnailPath: (thumbnailPath: string | null) =>
+    thumbnailPath ? `file://${thumbnailPath}` : null,
 }
 
 // Expose API to main world

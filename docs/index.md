@@ -41,6 +41,21 @@ Navigate through our comprehensive documentation:
   </div>
   
   <div class="doc-card">
+    <h3><a href="button-component">🔘 Button Component</a></h3>
+    <p>PrivlixButton with variants and states</p>
+  </div>
+  
+  <div class="doc-card">
+    <h3><a href="card-components">🃏 Card Components</a></h3>
+    <p>PrivlixCard and FeatureCard documentation</p>
+  </div>
+  
+  <div class="doc-card">
+    <h3><a href="startup-screen">🚀 Startup Screen</a></h3>
+    <p>Boot animation with logo and sound effects</p>
+  </div>
+  
+  <div class="doc-card">
     <h3><a href="i18n">🌍 Internationalization</a></h3>
     <p>Multi-language support</p>
   </div>

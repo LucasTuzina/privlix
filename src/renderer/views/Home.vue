@@ -1,19 +1,25 @@
 <template>
   <div class="home-view">
     <!-- Loading Overlay -->
-    <div v-if="mediaStore.isLoading" class="loading-overlay">
-      <div class="loading-spinner"></div>
+    <div
+      v-if="mediaStore.isLoading"
+      class="loading-overlay"
+    >
+      <div class="loading-spinner" />
       <p>{{ $t('loading.mediaLibrary') }}</p>
     </div>
 
     <!-- Welcome Screen when no media available -->
-    <WelcomeScreen 
+    <WelcomeScreen
       v-if="!mediaStore.selectedFolder && !mediaStore.isLoading"
       @select-folder="mediaStore.selectMediaFolder"
     />
 
     <!-- Main content -->
-    <div v-else-if="!mediaStore.isLoading" class="content-wrapper">
+    <div
+      v-else-if="!mediaStore.isLoading"
+      class="content-wrapper"
+    >
       <!-- Hero Section with Featured Content -->
       <HeroSection :featured-media="featuredMedia" />
 
@@ -54,82 +60,83 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
-import { useMediaStore } from '../stores/mediaStore'
-import WelcomeScreen from '../components/WelcomeScreen.vue'
-import HeroSection from '../components/HeroSection.vue'
-import MediaRow from '../components/MediaRow.vue'
-import StatsFooter from '../components/StatsFooter.vue'
-import type { Movie, Series } from '../../domain/entities/MediaTypes'
+  import { computed, onMounted } from 'vue'
+  import { useMediaStore } from '../stores/mediaStore'
+  import WelcomeScreen from '../components/WelcomeScreen.vue'
+  import HeroSection from '../components/HeroSection.vue'
+  import MediaRow from '../components/MediaRow.vue'
+  import StatsFooter from '../components/StatsFooter.vue'
+  import type { Movie, Series } from '../../domain/entities/MediaTypes'
 
-const mediaStore = useMediaStore()
+  const mediaStore = useMediaStore()
 
-const featuredMedia = computed((): Movie | Series | null => {
-  // Select random movie or first series for Hero Section
-  const allContent = [
-    ...mediaStore.mediaLibrary.movies,
-    ...mediaStore.mediaLibrary.series
-  ]
-  
-  if (allContent.length === 0) return null
-  
-  const randomIndex = Math.floor(Math.random() * allContent.length)
-  return allContent[randomIndex]
-})
+  const featuredMedia = computed((): Movie | Series | null => {
+    // Select random movie or first series for Hero Section
+    const allContent = [...mediaStore.mediaLibrary.movies, ...mediaStore.mediaLibrary.series]
 
-onMounted(async () => {
-  // Load data when component mounts
-  if (mediaStore.selectedFolder) {
-    await mediaStore.loadMediaLibrary()
-  }
-})
+    if (allContent.length === 0) return null
+
+    const randomIndex = Math.floor(Math.random() * allContent.length)
+    return allContent[randomIndex]
+  })
+
+  onMounted(async () => {
+    // Load data when component mounts
+    if (mediaStore.selectedFolder) {
+      await mediaStore.loadMediaLibrary()
+    }
+  })
 </script>
 
 <style scoped>
-.home-view {
-  position: relative;
-}
+  .home-view {
+    position: relative;
+  }
 
-.content-wrapper {
-  padding-bottom: 40px;
-}
+  .content-wrapper {
+    padding-bottom: 40px;
+  }
 
-.content-sections {
-  padding: 0 20px; /* Add horizontal padding for content sections */
-}
+  .content-sections {
+    padding: 0 20px; /* Add horizontal padding for content sections */
+  }
 
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
 
-.loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid #333;
-  border-top: 4px solid #e50914;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
-}
+  .loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #333;
+    border-top: 4px solid #e50914;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
 
-.loading-overlay p {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 500;
-}
+  .loading-overlay p {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+  }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>

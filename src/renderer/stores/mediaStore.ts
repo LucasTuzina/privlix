@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import type { 
-  MediaLibrary, 
-  MediaStats, 
+import type {
+  MediaLibrary,
+  MediaStats,
   MediaFile,
   Series,
-  SearchResult 
+  SearchResult,
 } from '@domain/entities/MediaTypes'
 
 export interface MediaStoreState {
@@ -21,33 +21,33 @@ export const useMediaStore = defineStore('media', {
   state: (): MediaStoreState => ({
     mediaLibrary: {
       movies: [],
-      series: []
+      series: [],
     },
     mediaStats: {
       totalMovies: 0,
       totalSeries: 0,
       totalEpisodes: 0,
       totalFiles: 0,
-      totalSize: 0
+      totalSize: 0,
     },
     recentlyWatched: [],
     searchResults: [],
     isLoading: false,
     selectedFolder: null,
-    currentQuery: ''
+    currentQuery: '',
   }),
 
   getters: {
     // Alphabetically sorted movies
     moviesSorted(): MediaFile[] {
-      return this.mediaLibrary.movies.sort((a, b) => 
+      return this.mediaLibrary.movies.sort((a, b) =>
         a.title.localeCompare(b.title, 'en', { numeric: true })
       )
     },
 
     // Alphabetically sorted series
     seriesSorted(): Series[] {
-      return this.mediaLibrary.series.sort((a: Series, b: Series) => 
+      return this.mediaLibrary.series.sort((a: Series, b: Series) =>
         a.name.localeCompare(b.name, 'en', { numeric: true })
       )
     },
@@ -57,7 +57,7 @@ export const useMediaStore = defineStore('media', {
       const movies = this.mediaLibrary.movies
       const seriesEpisodes = this.mediaLibrary.series.flatMap(s => s.episodes)
       return [...movies, ...seriesEpisodes]
-    }
+    },
   },
 
   actions: {
@@ -83,7 +83,7 @@ export const useMediaStore = defineStore('media', {
       try {
         const [library, stats] = await Promise.all([
           window.electronAPI.getMediaLibrary(),
-          window.electronAPI.getMediaStats()
+          window.electronAPI.getMediaStats(),
         ])
         this.mediaLibrary = library
         this.mediaStats = stats
@@ -113,7 +113,7 @@ export const useMediaStore = defineStore('media', {
 
       this.currentQuery = query
       this.isLoading = true
-      
+
       try {
         this.searchResults = await window.electronAPI.searchMedia(query)
       } catch (error) {
@@ -148,7 +148,7 @@ export const useMediaStore = defineStore('media', {
 
     formatDuration(seconds?: number): string {
       if (!seconds) return '0:00'
-      
+
       const hours = Math.floor(seconds / 3600)
       const minutes = Math.floor((seconds % 3600) / 60)
       const secs = Math.floor(seconds % 60)
@@ -162,7 +162,7 @@ export const useMediaStore = defineStore('media', {
 
     formatFileSize(bytes?: number): string {
       if (!bytes) return '0 B'
-      
+
       const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
       const i = Math.floor(Math.log(bytes) / Math.log(1024))
       return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`
@@ -171,6 +171,6 @@ export const useMediaStore = defineStore('media', {
     showNotification(message: string, type: 'info' | 'success' | 'error' = 'info'): void {
       // Notification Store will be implemented later
       console.log(`${type.toUpperCase()}: ${message}`)
-    }
-  }
+    },
+  },
 })

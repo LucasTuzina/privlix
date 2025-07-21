@@ -7,24 +7,24 @@
 </template>
 
 <script setup lang="ts">
-// Future implementation for search functionality
+  // Future implementation for search functionality
 </script>
 
 <style scoped>
-.search-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
+  .search-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-h1 {
-  color: #ffffff;
-  font-size: 32px;
-  margin-bottom: 20px;
-}
+  h1 {
+    color: #ffffff;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
 
-p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 18px;
-}
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+  }
 </style>

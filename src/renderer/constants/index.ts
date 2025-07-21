@@ -11,12 +11,17 @@ export const MEDIA_CARD_ASPECT_RATIO = 16 / 9
 
 // Media constants
 export const SUPPORTED_VIDEO_FORMATS = [
-  '.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.m4v'
+  '.mp4',
+  '.mkv',
+  '.avi',
+  '.mov',
+  '.wmv',
+  '.flv',
+  '.webm',
+  '.m4v',
 ] as const
 
-export const SUPPORTED_SUBTITLE_FORMATS = [
-  '.srt', '.vtt', '.ass', '.ssa'
-] as const
+export const SUPPORTED_SUBTITLE_FORMATS = ['.srt', '.vtt', '.ass', '.ssa'] as const
 
 // Search constants
 export const SEARCH_DEBOUNCE_DELAY = 300
@@ -32,14 +37,14 @@ export const BREAKPOINTS = {
   mobile: 768,
   tablet: 1024,
   desktop: 1200,
-  wide: 1600
+  wide: 1600,
 } as const
 
 // Animation durations (in ms)
 export const ANIMATION_DURATION = {
   fast: 150,
   normal: 300,
-  slow: 500
+  slow: 500,
 } as const
 
 // Z-index layers
@@ -47,7 +52,7 @@ export const Z_INDEX = {
   dropdown: 1000,
   modal: 1100,
   toast: 1200,
-  tooltip: 1300
+  tooltip: 1300,
 } as const
 
 // Local storage keys
@@ -56,7 +61,7 @@ export const STORAGE_KEYS = {
   theme: 'privlix-theme',
   mediaFolder: 'privlix-media-folder',
   watchProgress: 'privlix-watch-progress',
-  settings: 'privlix-settings'
+  settings: 'privlix-settings',
 } as const
 
 // API endpoints (if needed for future extensions)
@@ -69,5 +74,5 @@ export const ERROR_MESSAGES = {
   FOLDER_ACCESS_DENIED: 'common.errors.folderAccessDenied',
   FILE_NOT_FOUND: 'common.errors.fileNotFound',
   UNSUPPORTED_FORMAT: 'common.errors.unsupportedFormat',
-  SCAN_FAILED: 'common.errors.scanFailed'
+  SCAN_FAILED: 'common.errors.scanFailed',
 } as const

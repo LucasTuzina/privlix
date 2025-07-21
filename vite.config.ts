@@ -12,9 +12,9 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve('src/renderer/index.html')
-      }
-    }
+        main: resolve('src/renderer/index.html'),
+      },
+    },
   },
   resolve: {
     alias: {
@@ -30,10 +30,10 @@ export default defineConfig({
       '@types': fileURLToPath(new URL('./src/renderer/types', import.meta.url)),
       '@config': fileURLToPath(new URL('./src/renderer/config', import.meta.url)),
       '@plugins': fileURLToPath(new URL('./src/renderer/plugins', import.meta.url)),
-      '@store': fileURLToPath(new URL('./src/renderer/store', import.meta.url))
-    }
+      '@store': fileURLToPath(new URL('./src/renderer/store', import.meta.url)),
+    },
   },
   server: {
-    port: 3000
-  }
+    port: 3000,
+  },
 })

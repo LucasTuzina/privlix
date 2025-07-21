@@ -24,16 +24,18 @@ export const formatDuration = (seconds: number): string => {
   if (hours > 0) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
   }
-  
+
   return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
 }
 
 /**
  * Debounce function execution
  */
-export const debounce = <T extends (...args: any[]) => any>(
+// eslint-disable-next-line no-unused-vars
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
+  // eslint-disable-next-line no-unused-vars
 ): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout | undefined
 
@@ -42,11 +44,11 @@ export const debounce = <T extends (...args: any[]) => any>(
       timeout = undefined
       func(...args)
     }
-    
+
     if (timeout) {
       clearTimeout(timeout)
     }
-    
+
     timeout = setTimeout(later, wait)
   }
 }
@@ -54,12 +56,14 @@ export const debounce = <T extends (...args: any[]) => any>(
 /**
  * Throttle function execution
  */
-export const throttle = <T extends (...args: any[]) => any>(
+// eslint-disable-next-line no-unused-vars
+export const throttle = <T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
+  // eslint-disable-next-line no-unused-vars
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args)
@@ -86,10 +90,10 @@ export const clamp = (value: number, min: number, max: number): number => {
 /**
  * Check if value is empty (null, undefined, empty string, empty array, empty object)
  */
-export const isEmpty = (value: any): boolean => {
+export const isEmpty = (value: unknown): boolean => {
   if (value == null) return true
   if (typeof value === 'string') return value.trim() === ''
   if (Array.isArray(value)) return value.length === 0
-  if (typeof value === 'object') return Object.keys(value).length === 0
+  if (typeof value === 'object') return Object.keys(value as Record<string, unknown>).length === 0
   return false
 }
