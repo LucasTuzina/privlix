@@ -3,7 +3,7 @@
     <!-- Loading Overlay -->
     <div v-if="mediaStore.isLoading" class="loading-overlay">
       <div class="loading-spinner"></div>
-      <p>Loading media library...</p>
+      <p>{{ $t('loading.mediaLibrary') }}</p>
     </div>
 
     <!-- Welcome Screen when no media available -->
@@ -20,7 +20,7 @@
       <!-- Recently Watched -->
       <MediaRow
         v-if="mediaStore.recentlyWatched.length > 0"
-        title="Continue Watching"
+        :title="$t('mediaRows.continueWatching')"
         :items="mediaStore.recentlyWatched"
         type="continue"
         show-progress
@@ -29,8 +29,8 @@
       <!-- Movies -->
       <MediaRow
         v-if="mediaStore.moviesSorted.length > 0"
-        title="All Movies"
-        subtitle="Sorted alphabetically"
+        :title="$t('mediaRows.allMovies')"
+        :subtitle="$t('mediaRows.sortedAlphabetically')"
         :items="mediaStore.moviesSorted"
         type="movies"
       />
@@ -38,8 +38,8 @@
       <!-- Series -->
       <MediaRow
         v-if="mediaStore.seriesSorted.length > 0"
-        title="All Series"
-        subtitle="Sorted alphabetically"
+        :title="$t('mediaRows.allSeries')"
+        :subtitle="$t('mediaRows.sortedAlphabetically')"
         :items="mediaStore.seriesSorted"
         type="series"
       />

@@ -25,14 +25,23 @@
       "@shared/*": ["./src/shared/*"],
       "@domain/*": ["./src/domain/*"],
       "@infrastructure/*": ["./src/infrastructure/*"],
-      "@application/*": ["./src/application/*"]
+      "@application/*": ["./src/application/*"],
+      "@components/*": ["./src/renderer/components/*"],
+      "@views/*": ["./src/renderer/views/*"],
+      "@utils/*": ["./src/renderer/utils/*"],
+      "@constants/*": ["./src/renderer/constants/*"],
+      "@types/*": ["./src/renderer/types/*"],
+      "@config/*": ["./src/renderer/config/*"],
+      "@plugins/*": ["./src/renderer/plugins/*"],
+      "@store/*": ["./src/renderer/store/*"]
     }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts", 
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/vite-env.d.ts"
   ],
   "references": [
     { "path": "./tsconfig.node.json" }

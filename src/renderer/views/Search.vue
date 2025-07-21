@@ -1,8 +1,8 @@
 <template>
   <div class="search-view">
     <div class="search-container">
-      <h1>Search</h1>
-      <p>Search functionality will be implemented...</p>
+      <h1>{{ $t('search.title') }}</h1>
+      <p>{{ $t('common.loading') }}</p>
     </div>
   </div>
 </template>

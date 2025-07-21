@@ -1,7 +1,7 @@
 <template>
   <div class="video-player">
-    <h1>Video Player</h1>
-    <p>Player will be implemented...</p>
+    <h1>{{ $t('videoPlayer.title') }}</h1>
+    <p>{{ $t('videoPlayer.loading') }}</p>
     <p v-if="id">Video ID: {{ id }}</p>
   </div>
 </template>

@@ -8,37 +8,36 @@
         </div>
         
         <h2 class="welcome-title">
-          Welcome to Your Private Media Library
+          {{ $t('welcome.title') }}
         </h2>
         
         <p class="welcome-description">
-          Transform your local video collection into a Netflix-like streaming experience. 
-          Organized, elegant, and completely private.
+          {{ $t('welcome.description') }}
         </p>
 
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">🎬</div>
-            <h3>Automatic Organization</h3>
-            <p>Automatically detects movies and series and organizes them clearly</p>
+            <h3>{{ $t('welcome.features.autoOrganization.title') }}</h3>
+            <p>{{ $t('welcome.features.autoOrganization.description') }}</p>
           </div>
           
           <div class="feature-card">
             <div class="feature-icon">🔍</div>
-            <h3>Smart Search</h3>
-            <p>Find your content lightning-fast with the integrated search function</p>
+            <h3>{{ $t('welcome.features.smartSearch.title') }}</h3>
+            <p>{{ $t('welcome.features.smartSearch.description') }}</p>
           </div>
           
           <div class="feature-card">
             <div class="feature-icon">📱</div>
-            <h3>Modern Interface</h3>
-            <p>Netflix-inspired design for the best user experience</p>
+            <h3>{{ $t('welcome.features.modernInterface.title') }}</h3>
+            <p>{{ $t('welcome.features.modernInterface.description') }}</p>
           </div>
           
           <div class="feature-card">
             <div class="feature-icon">🔒</div>
-            <h3>100% Private</h3>
-            <p>All data stays local on your computer - no cloud required</p>
+            <h3>{{ $t('welcome.features.privateData.title') }}</h3>
+            <p>{{ $t('welcome.features.privateData.description') }}</p>
           </div>
         </div>
 
@@ -48,11 +47,11 @@
               <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"/>
             </svg>
             <div v-else class="loading-spinner small"></div>
-            {{ isSelecting ? 'Scanning folder...' : 'Select Media Folder' }}
+            {{ isSelecting ? $t('welcome.actions.scanning') : $t('welcome.actions.selectFolder') }}
           </button>
           
           <p class="help-text">
-            Select the main folder that contains your movies and series
+            {{ $t('welcome.actions.helpText') }}
           </p>
         </div>
       </div>

@@ -21,6 +21,7 @@ A private media library with Netflix-style interface for local video collections
 - **TypeScript** for type safety
 - **Pinia** for state management
 - **Vue Router** for navigation
+- **Vue i18n** for internationalization (English/German)
 - **Vite** for fast development and building
 
 ### Backend
@@ -55,12 +56,20 @@ privlix/
 │   │   ├── index.ts               # Main process entry point
 │   │   └── preload.js             # Preload script for secure IPC
 │   └── renderer/                   # Vue.js Frontend
-│       ├── components/             # Vue components (Composition API)
+│       ├── app/                   # Application factory and configuration
+│       ├── components/            # Vue components (Composition API)
 │       ├── views/                 # Vue views/pages
-│       ├── stores/                # Pinia stores
+│       ├── router/                # Vue Router configuration
+│       ├── store/                 # Pinia store configuration
+│       ├── plugins/               # Vue plugin registration
+│       ├── config/                # Application configuration
+│       ├── i18n.ts                # Internationalization setup
+│       ├── locales/               # Translation files (en.json, de.json)
+│       ├── utils/                 # Utility functions
+│       ├── constants/             # Application constants
 │       ├── types/                 # TypeScript type definitions
 │       ├── App.vue                # Main app component
-│       ├── main.js                # Vue entry point
+│       ├── main.ts                # Vue entry point (TypeScript)
 │       └── index.html             # HTML template
 ├── dist/                          # Build output
 ├── tsconfig.json                  # TypeScript configuration
@@ -196,6 +205,18 @@ All core components have been successfully migrated to TypeScript and Vue Compos
 - ✅ **Localization**: All texts translated to English
 - ✅ **Build System**: TypeScript compilation and type checking
 - ✅ **Type Safety**: Full type coverage with proper interfaces
+- ✅ **Internationalization**: Complete i18n setup with English and German
+  - ✅ Vue i18n integration with TypeScript
+  - ✅ Language detection and persistence  
+  - ✅ Language switcher component in navigation
+  - ✅ All templates localized with translation keys
+  - ✅ Settings page with language selection
+  - ✅ Automatic fallback to English
+
+### Language Support:
+- 🇺🇸 **English** (default)
+- 🇩🇪 **German** (Deutsch)
+- 🔧 **Extensible** for additional languages
 
 ### Build Status:
 - ✅ TypeScript compilation: No errors

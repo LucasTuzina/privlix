@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "search": "Suchen",
+    "settings": "Einstellungen",
+    "searchPlaceholder": "Filme & Serien suchen..."
+  },
+  "welcome": {
+    "title": "Willkommen zu Ihrer privaten Mediathek",
+    "description": "Verwandeln Sie Ihre lokale Videosammlung in eine Netflix-ähnliche Streaming-Erfahrung. Organisiert, elegant und vollständig privat.",
+    "features": {
+      "autoOrganization": {
+        "title": "Automatische Organisation",
+        "description": "Erkennt Filme und Serien automatisch und organisiert sie übersichtlich"
+      },
+      "smartSearch": {
+        "title": "Intelligente Suche",
+        "description": "Finden Sie Ihre Inhalte blitzschnell mit der integrierten Suchfunktion"
+      },
+      "modernInterface": {
+        "title": "Modernes Interface",
+        "description": "Netflix-inspiriertes Design für die beste Benutzererfahrung"
+      },
+      "privateData": {
+        "title": "100% Privat",
+        "description": "Alle Daten bleiben lokal auf Ihrem Computer - keine Cloud erforderlich"
+      }
+    },
+    "actions": {
+      "selectFolder": "Medien-Ordner auswählen",
+      "scanning": "Ordner wird gescannt...",
+      "helpText": "Wählen Sie den Hauptordner aus, der Ihre Filme und Serien enthält"
+    }
+  },
+  "hero": {
+    "featuredContent": "Empfohlener Inhalt - Entdecken Sie großartige Filme und Serien",
+    "play": "Abspielen",
+    "moreInfo": "Weitere Infos"
+  },
+  "mediaRows": {
+    "continueWatching": "Zuletzt angesehen",
+    "allMovies": "Alle Filme",
+    "allSeries": "Alle Serien",
+    "sortedAlphabetically": "Alphabetisch sortiert"
+  },
+  "stats": {
+    "movies": "Filme",
+    "series": "Serien", 
+    "episodes": "Episoden",
+    "totalFiles": "Dateien gesamt",
+    "totalSize": "Gesamtgröße"
+  },
+  "loading": {
+    "mediaLibrary": "Mediathek wird geladen...",
+    "scanning": "Scanne Dateien..."
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Nach Titeln suchen...",
+    "noResults": "Keine Ergebnisse gefunden",
+    "resultsCount": "{count} Ergebnisse gefunden"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "mediaFolder": "Medien-Ordner",
+    "changeFolder": "Ordner ändern",
+    "general": "Allgemein",
+    "playback": "Wiedergabe",
+    "appearance": "Erscheinungsbild"
+  },
+  "videoPlayer": {
+    "title": "Video Player",
+    "loading": "Player wird geladen..."
+  },
+  "notifications": {
+    "folderSelected": "Medien-Ordner erfolgreich ausgewählt",
+    "scanComplete": "Medienscan abgeschlossen",
+    "error": "Ein Fehler ist aufgetreten"
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolgreich",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "retry": "Wiederholen"
+  }
+}

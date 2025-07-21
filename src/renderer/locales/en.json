@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "settings": "Settings",
+    "searchPlaceholder": "Search movies & series..."
+  },
+  "welcome": {
+    "title": "Welcome to Your Private Media Library",
+    "description": "Transform your local video collection into a Netflix-like streaming experience. Organized, elegant, and completely private.",
+    "features": {
+      "autoOrganization": {
+        "title": "Automatic Organization",
+        "description": "Automatically detects movies and series and organizes them clearly"
+      },
+      "smartSearch": {
+        "title": "Smart Search",
+        "description": "Find your content lightning-fast with the integrated search function"
+      },
+      "modernInterface": {
+        "title": "Modern Interface",
+        "description": "Netflix-inspired design for the best user experience"
+      },
+      "privateData": {
+        "title": "100% Private",
+        "description": "All data stays local on your computer - no cloud required"
+      }
+    },
+    "actions": {
+      "selectFolder": "Select Media Folder",
+      "scanning": "Scanning folder...",
+      "helpText": "Select the main folder that contains your movies and series"
+    }
+  },
+  "hero": {
+    "featuredContent": "Featured Content - Discover amazing movies and series",
+    "play": "Play",
+    "moreInfo": "More Info"
+  },
+  "mediaRows": {
+    "continueWatching": "Continue Watching",
+    "allMovies": "All Movies",
+    "allSeries": "All Series",
+    "sortedAlphabetically": "Sorted alphabetically"
+  },
+  "stats": {
+    "movies": "Movies",
+    "series": "Series",
+    "episodes": "Episodes", 
+    "totalFiles": "Total Files",
+    "totalSize": "Total Size"
+  },
+  "loading": {
+    "mediaLibrary": "Loading media library...",
+    "scanning": "Scanning files..."
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search for titles...",
+    "noResults": "No results found",
+    "resultsCount": "{count} results found"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "mediaFolder": "Media Folder",
+    "changeFolder": "Change Folder",
+    "general": "General",
+    "playback": "Playback",
+    "appearance": "Appearance"
+  },
+  "videoPlayer": {
+    "title": "Video Player",
+    "loading": "Loading player..."
+  },
+  "notifications": {
+    "folderSelected": "Media folder selected successfully",
+    "scanComplete": "Media scan completed",
+    "error": "An error occurred"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "retry": "Retry"
+  }
+}

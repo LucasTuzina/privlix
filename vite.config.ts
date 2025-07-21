@@ -22,7 +22,15 @@ export default defineConfig({
       '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
       '@domain': fileURLToPath(new URL('./src/domain', import.meta.url)),
       '@application': fileURLToPath(new URL('./src/application', import.meta.url)),
-      '@infrastructure': fileURLToPath(new URL('./src/infrastructure', import.meta.url))
+      '@infrastructure': fileURLToPath(new URL('./src/infrastructure', import.meta.url)),
+      '@components': fileURLToPath(new URL('./src/renderer/components', import.meta.url)),
+      '@views': fileURLToPath(new URL('./src/renderer/views', import.meta.url)),
+      '@utils': fileURLToPath(new URL('./src/renderer/utils', import.meta.url)),
+      '@constants': fileURLToPath(new URL('./src/renderer/constants', import.meta.url)),
+      '@types': fileURLToPath(new URL('./src/renderer/types', import.meta.url)),
+      '@config': fileURLToPath(new URL('./src/renderer/config', import.meta.url)),
+      '@plugins': fileURLToPath(new URL('./src/renderer/plugins', import.meta.url)),
+      '@store': fileURLToPath(new URL('./src/renderer/store', import.meta.url))
     }
   },
   server: {

@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{ 'player-mode': isPlayerMode }">
-    <!-- Hauptnavigation -->
+    <!-- Main Navigation -->
     <NavBar v-if="!isPlayerMode" />
     
     <!-- Router View -->
@@ -11,35 +11,22 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMediaStore } from './stores/mediaStore'
 import NavBar from './components/NavBar.vue'
 import NotificationContainer from './components/NotificationContainer.vue'
 
-export default {
-  name: 'App',
-  components: {
-    NavBar,
-    NotificationContainer
-  },
-  setup() {
-    const route = useRoute()
-    const mediaStore = useMediaStore()
+const route = useRoute()
+const mediaStore = useMediaStore()
 
-    const isPlayerMode = computed(() => {
-      return route.name === 'Player'
-    })
+const isPlayerMode = computed(() => {
+  return route.name === 'Player'
+})
 
-    // Medien-Bibliothek beim Start laden
-    mediaStore.loadMediaLibrary()
-
-    return {
-      isPlayerMode
-    }
-  }
-}
+// Load media library on app start
+mediaStore.loadMediaLibrary()
 </script>
 
 <style>
@@ -65,7 +52,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding-top: 70px; /* Platz für NavBar */
+  padding-top: 70px; /* Space for NavBar */
   transition: all 0.3s ease;
 }
 
