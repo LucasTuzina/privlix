@@ -20,8 +20,7 @@
           </select>
         </div>
       </div>
-      
-      <p class="settings-placeholder">{{ $t('common.loading') }}</p>
+
     </div>
   </div>
 </template>
@@ -46,8 +45,6 @@ onMounted(() => {
 
 <style scoped>
 .settings-view {
-  min-height: 100vh;
-  padding: 40px;
   background: #141414;
 }
 
@@ -116,16 +113,9 @@ onMounted(() => {
   color: #ffffff;
 }
 
-.settings-placeholder {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  text-align: center;
-  margin-top: 40px;
-}
-
 @media (max-width: 768px) {
-  .settings-view {
-    padding: 20px;
+  .settings-container {
+    padding: 0 10px;
   }
   
   .setting-item {

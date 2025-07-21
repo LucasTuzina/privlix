@@ -1,12 +1,16 @@
 <template>
-  <div id="app" :class="{ 'player-mode': isPlayerMode }">
-    <!-- Main Navigation -->
-    <NavBar v-if="!isPlayerMode" />
+  <div id="app">
+    <!-- Player Layout for fullscreen video -->
+    <PlayerLayout v-if="isPlayerMode">
+      <router-view />
+    </PlayerLayout>
     
-    <!-- Router View -->
-    <router-view class="main-content" />
+    <!-- Base Layout for all other pages -->
+    <BaseLayout v-else :content-class="getContentClass" :layout-mode="getLayoutMode">
+      <router-view />
+    </BaseLayout>
     
-    <!-- Notification System -->
+    <!-- Notification System (always present) -->
     <NotificationContainer />
   </div>
 </template>
@@ -15,7 +19,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMediaStore } from './stores/mediaStore'
-import NavBar from './components/NavBar.vue'
+import BaseLayout from './components/BaseLayout.vue'
+import PlayerLayout from './components/PlayerLayout.vue'
 import NotificationContainer from './components/NotificationContainer.vue'
 
 const route = useRoute()
@@ -23,6 +28,22 @@ const mediaStore = useMediaStore()
 
 const isPlayerMode = computed(() => {
   return route.name === 'Player'
+})
+
+// Determine content class based on current route
+const getContentClass = computed(() => {
+  if (route.name === 'Home') {
+    return 'no-horizontal-padding'
+  }
+  return ''
+})
+
+// Determine layout mode based on current route
+const getLayoutMode = computed(() => {
+  if (route.name === 'Home') {
+    return 'overlay' // Content starts from top, behind navbar for hero background
+  }
+  return 'standard' // Content starts below navbar
 })
 
 // Load media library on app start
@@ -46,18 +67,7 @@ body {
 
 #app {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  flex: 1;
-  padding-top: 70px; /* Space for NavBar */
-  transition: all 0.3s ease;
-}
-
-.player-mode .main-content {
-  padding-top: 0;
+  position: relative;
 }
 
 /* Scrollbar Styling */

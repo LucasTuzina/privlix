@@ -1,0 +1,33 @@
+title: Privlix Documentation
+description: A private media library with Netflix-style interface
+theme: minima
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+navigation:
+  - name: Installation
+    link: installation.html
+  - name: Usage
+    link: usage.html  
+  - name: Architecture
+    link: architecture.html
+  - name: Project Structure
+    link: project-structure.html
+  - name: Layout System
+    link: layout-system.html
+  - name: Logo Component
+    link: logo_usage.html
+  - name: Internationalization
+    link: i18n.html
+  - name: Migration Status
+    link: migration-status.html
+  - name: Roadmap
+    link: roadmap.html
+
+exclude:
+  - README.md

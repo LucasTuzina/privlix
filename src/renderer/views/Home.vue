@@ -13,39 +13,42 @@
     />
 
     <!-- Main content -->
-    <div v-else-if="!mediaStore.isLoading" class="main-content">
+    <div v-else-if="!mediaStore.isLoading" class="content-wrapper">
       <!-- Hero Section with Featured Content -->
       <HeroSection :featured-media="featuredMedia" />
 
-      <!-- Recently Watched -->
-      <MediaRow
-        v-if="mediaStore.recentlyWatched.length > 0"
-        :title="$t('mediaRows.continueWatching')"
-        :items="mediaStore.recentlyWatched"
-        type="continue"
-        show-progress
-      />
+      <!-- Content sections with proper padding -->
+      <div class="content-sections">
+        <!-- Recently Watched -->
+        <MediaRow
+          v-if="mediaStore.recentlyWatched.length > 0"
+          :title="$t('mediaRows.continueWatching')"
+          :items="mediaStore.recentlyWatched"
+          type="continue"
+          show-progress
+        />
 
-      <!-- Movies -->
-      <MediaRow
-        v-if="mediaStore.moviesSorted.length > 0"
-        :title="$t('mediaRows.allMovies')"
-        :subtitle="$t('mediaRows.sortedAlphabetically')"
-        :items="mediaStore.moviesSorted"
-        type="movies"
-      />
+        <!-- Movies -->
+        <MediaRow
+          v-if="mediaStore.moviesSorted.length > 0"
+          :title="$t('mediaRows.allMovies')"
+          :subtitle="$t('mediaRows.sortedAlphabetically')"
+          :items="mediaStore.moviesSorted"
+          type="movies"
+        />
 
-      <!-- Series -->
-      <MediaRow
-        v-if="mediaStore.seriesSorted.length > 0"
-        :title="$t('mediaRows.allSeries')"
-        :subtitle="$t('mediaRows.sortedAlphabetically')"
-        :items="mediaStore.seriesSorted"
-        type="series"
-      />
+        <!-- Series -->
+        <MediaRow
+          v-if="mediaStore.seriesSorted.length > 0"
+          :title="$t('mediaRows.allSeries')"
+          :subtitle="$t('mediaRows.sortedAlphabetically')"
+          :items="mediaStore.seriesSorted"
+          type="series"
+        />
 
-      <!-- Statistics Footer -->
-      <StatsFooter :stats="mediaStore.mediaStats" />
+        <!-- Statistics Footer -->
+        <StatsFooter :stats="mediaStore.mediaStats" />
+      </div>
     </div>
   </div>
 </template>
@@ -84,12 +87,15 @@ onMounted(async () => {
 
 <style scoped>
 .home-view {
-  min-height: 100vh;
   position: relative;
 }
 
-.main-content {
-  padding-bottom: 60px;
+.content-wrapper {
+  padding-bottom: 40px;
+}
+
+.content-sections {
+  padding: 0 20px; /* Add horizontal padding for content sections */
 }
 
 .loading-overlay {

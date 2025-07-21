@@ -2,8 +2,11 @@
   <nav class="navbar">
     <div class="nav-brand">
       <router-link to="/" class="brand-link">
-        <div class="brand-logo">P</div>
-        <h1 class="brand-text">Privlix</h1>
+        <PrivlixLogo 
+          size="medium" 
+          :is-clickable="false"
+          variant="default"
+        />
       </router-link>
     </div>
 
@@ -13,7 +16,7 @@
         :key="item.name"
         :to="item.path" 
         class="nav-link"
-        :class="{ active: $route.name === item.name }"
+        :class="{ active: route.name === item.name }"
       >
         {{ $t(item.label) }}
       </router-link>
@@ -53,80 +56,66 @@
   </nav>
 </template>
 
-<script>
-import { ref, computed, watch } from 'vue'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useMediaStore } from '../stores/mediaStore'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import PrivlixLogo from './PrivlixLogo.vue'
 
-export default {
-  name: 'NavBar',
-  setup() {
-    const router = useRouter()
-    const route = useRoute()
-    const mediaStore = useMediaStore()
+const router = useRouter()
+const route = useRoute()
+const mediaStore = useMediaStore()
 
-    const searchQuery = ref('')
-    const isSearchExpanded = ref(false)
-    const searchTimeout = ref(null)
+const searchQuery = ref('')
+const isSearchExpanded = ref(false)
+const searchTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
-    const navItems = [
-      { name: 'Home', path: '/', label: 'nav.home' },
-      { name: 'Search', path: '/search', label: 'nav.search' }
-    ]
+const navItems = [
+  { name: 'Home', path: '/', label: 'nav.home' },
+  { name: 'Search', path: '/search', label: 'nav.search' }
+]
 
-    const handleSearch = () => {
-      if (searchTimeout.value) {
-        clearTimeout(searchTimeout.value)
-      }
-      
-      searchTimeout.value = setTimeout(() => {
-        if (searchQuery.value.trim()) {
-          mediaStore.searchMedia(searchQuery.value)
-          if (route.name !== 'Search') {
-            router.push('/search')
-          }
-        }
-      }, 300)
-    }
-
-    const performSearch = () => {
-      if (searchQuery.value.trim()) {
-        mediaStore.searchMedia(searchQuery.value)
+const handleSearch = (): void => {
+  if (searchTimeout.value) {
+    clearTimeout(searchTimeout.value)
+  }
+  
+  searchTimeout.value = setTimeout(() => {
+    if (searchQuery.value.trim()) {
+      mediaStore.searchMedia(searchQuery.value)
+      if (route.name !== 'Search') {
         router.push('/search')
       }
     }
+  }, 300)
+}
 
-    const handleSearchBlur = () => {
-      setTimeout(() => {
-        if (!searchQuery.value) {
-          isSearchExpanded.value = false
-        }
-      }, 200)
-    }
-
-    const showSettings = () => {
-      router.push('/settings')
-    }
-
-    // Watch für Route-Änderungen
-    watch(route, (newRoute) => {
-      if (newRoute.name !== 'Search') {
-        searchQuery.value = ''
-      }
-    })
-
-    return {
-      searchQuery,
-      isSearchExpanded,
-      navItems,
-      handleSearch,
-      performSearch,
-      handleSearchBlur,
-      showSettings
-    }
+const performSearch = (): void => {
+  if (searchQuery.value.trim()) {
+    mediaStore.searchMedia(searchQuery.value)
+    router.push('/search')
   }
 }
+
+const handleSearchBlur = (): void => {
+  setTimeout(() => {
+    if (!searchQuery.value) {
+      isSearchExpanded.value = false
+    }
+  }, 200)
+}
+
+const showSettings = (): void => {
+  router.push('/settings')
+}
+
+// Watch for route changes
+watch(route, (newRoute) => {
+  if (newRoute.name !== 'Search') {
+    searchQuery.value = ''
+  }
+})
 </script>
 
 <style scoped>
@@ -161,28 +150,6 @@ export default {
   align-items: center;
   text-decoration: none;
   color: inherit;
-}
-
-.brand-logo {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #e50914 0%, #f40612 100%);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 24px;
-  color: white;
-  margin-right: 12px;
-  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
-}
-
-.brand-text {
-  font-size: 28px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.5px;
 }
 
 .nav-center {

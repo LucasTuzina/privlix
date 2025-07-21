@@ -2,7 +2,6 @@
   <div class="search-view">
     <div class="search-container">
       <h1>{{ $t('search.title') }}</h1>
-      <p>{{ $t('common.loading') }}</p>
     </div>
   </div>
 </template>
@@ -12,10 +11,6 @@
 </script>
 
 <style scoped>
-.search-view {
-  padding: 40px;
-}
-
 .search-container {
   max-width: 1200px;
   margin: 0 auto;

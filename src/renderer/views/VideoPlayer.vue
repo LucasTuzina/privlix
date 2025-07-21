@@ -18,6 +18,12 @@ defineProps<Props>()
 .video-player {
   padding: 40px;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
 }
 
 h1 {

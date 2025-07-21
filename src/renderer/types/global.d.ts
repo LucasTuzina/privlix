@@ -10,11 +10,20 @@ declare module '*.vue' {
 declare global {
   interface Window {
     electronAPI: {
+      // Media management
       selectMediaFolder: () => Promise<string | null>
-      watchFiles: (folderPath: string) => Promise<void>
-      scanMediaFiles: (folderPath: string) => Promise<any[]>
-      getFileStats: (filePath: string) => Promise<any>
-      openFile: (filePath: string) => Promise<void>
+      getMediaLibrary: () => Promise<any[]>
+      getMediaStats: () => Promise<any>
+      searchMedia: (query: string) => Promise<any[]>
+      getRecentlyWatched: () => Promise<any[]>
+      
+      // Playback
+      updateWatchProgress: (mediaId: string, progress: number, timestamp: number) => Promise<void>
+      getVideoInfo: (filePath: string) => Promise<any>
+      
+      // File system
+      getFilePath: (filePath: string) => string
+      getThumbnailPath: (thumbnailPath: string | null) => string | null
     }
   }
 }

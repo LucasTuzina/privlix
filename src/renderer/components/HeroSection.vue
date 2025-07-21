@@ -42,14 +42,16 @@ const getMediaTitle = (media: Movie | Series): string => {
 
 <style scoped>
 .hero-section {
-  height: 400px;
+  height: 500px; /* Increased height to account for navbar overlay */
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   display: flex;
   align-items: center;
-  padding: 0 60px;
+  padding: 70px 60px 40px; /* Top padding for navbar space */
   margin-bottom: 40px;
   position: relative;
   overflow: hidden;
+  margin-top: -70px; /* Pull up to go behind navbar */
+  padding-top: 140px; /* Adjust padding to account for navbar */
 }
 
 .hero-background {
@@ -131,8 +133,10 @@ const getMediaTitle = (media: Movie | Series): string => {
 
 @media (max-width: 768px) {
   .hero-section {
-    height: 300px;
-    padding: 0 20px;
+    height: 400px;
+    padding: 70px 20px 20px; /* Adjusted padding for mobile */
+    margin-top: -70px; /* Keep the navbar overlay effect */
+    padding-top: 120px; /* Adjusted for mobile navbar */
   }
   
   .hero-content h1 {

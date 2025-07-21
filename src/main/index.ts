@@ -48,7 +48,7 @@ class MainProcess {
     });
 
     const startUrl = this.isDevelopment 
-      ? 'http://localhost:3001'
+      ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../renderer/index.html')}`;
 
     this.mainWindow.loadURL(startUrl);

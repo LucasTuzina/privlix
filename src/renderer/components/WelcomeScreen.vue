@@ -3,8 +3,13 @@
     <div class="welcome-container">
       <div class="welcome-hero">
         <div class="welcome-logo">
-          <div class="logo-icon">P</div>
-          <h1>Privlix</h1>
+          <PrivlixLogo 
+            size="xl" 
+            variant="brand"
+            :show-text="true"
+            text-color="#ffffff"
+            icon-color="#ffffff"
+          />
         </div>
         
         <h2 class="welcome-title">
@@ -73,28 +78,22 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue'
+import PrivlixLogo from './PrivlixLogo.vue'
 
-export default {
-  name: 'WelcomeScreen',
-  emits: ['select-folder'],
-  setup(props, { emit }) {
-    const isSelecting = ref(false)
+const emit = defineEmits<{
+  'select-folder': []
+}>()
 
-    const handleSelectFolder = async () => {
-      isSelecting.value = true
-      try {
-        await emit('select-folder')
-      } finally {
-        isSelecting.value = false
-      }
-    }
+const isSelecting = ref(false)
 
-    return {
-      isSelecting,
-      handleSelectFolder
-    }
+const handleSelectFolder = async (): Promise<void> => {
+  isSelecting.value = true
+  try {
+    await emit('select-folder')
+  } finally {
+    isSelecting.value = false
   }
 }
 </script>
@@ -122,32 +121,7 @@ export default {
 }
 
 .welcome-logo {
-  display: flex;
-  align-items: center;
   margin-bottom: 40px;
-}
-
-.logo-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #e50914 0%, #f40612 100%);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 32px;
-  color: white;
-  margin-right: 20px;
-  box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4);
-}
-
-.welcome-logo h1 {
-  font-size: 48px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -1px;
 }
 
 .welcome-title {
