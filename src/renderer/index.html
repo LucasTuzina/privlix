@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privlix - Your Private Media Library</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #141414;
-      color: #ffffff;
-      overflow-x: hidden;
-    }
-    
-    #app {
-      min-height: 100vh;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    /* Loading Spinner */
+    /* Minimal loading styles before main CSS loads */
     .loading {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       flex-direction: column;
+      background: #141414;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .spinner {
@@ -41,11 +28,17 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <div class="loading">
@@ -55,4 +48,5 @@
   </div>
   <script type="module" src="./main.ts"></script>
 </body>
+
 </html>

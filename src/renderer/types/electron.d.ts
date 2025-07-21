@@ -1,4 +1,9 @@
-import type { MediaLibrary, MediaStats, MediaFile, SearchResult } from '@domain/entities/MediaTypes'
+import type {
+  MediaItem,
+  MediaCollection,
+  MediaLibraryStats,
+  MediaLibrary,
+} from '../../shared/types/MediaTypes'
 
 export interface ElectronAPI {
   // Media folder management
@@ -6,15 +11,19 @@ export interface ElectronAPI {
 
   // Media library queries
   getMediaLibrary(): Promise<MediaLibrary>
-  getMediaStats(): Promise<MediaStats>
-  getRecentlyWatched(): Promise<MediaFile[]>
-  getMediaById(id: string): Promise<MediaFile | null>
+  getMediaStats(): Promise<MediaLibraryStats>
+  getRecentlyWatched(): Promise<MediaItem[]>
+  getMediaById(id: string): Promise<MediaItem | null>
 
   // Search
-  searchMedia(query: string): Promise<SearchResult<MediaFile>[]>
+  searchMedia(query: string): Promise<MediaItem[]>
 
   // Watch progress
-  updateWatchProgress(mediaId: string, progress: number, timestamp: number): Promise<void>
+  updateWatchProgress(
+    filePath: string,
+    currentTime: number,
+    duration: number
+  ): Promise<{ success: boolean }>
 
   // File system utilities
   getFilePath(filePath: string): string

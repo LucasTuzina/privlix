@@ -71,7 +71,10 @@
   },
   "videoPlayer": {
     "title": "Video Player",
-    "loading": "Player wird geladen..."
+    "loading": "Player wird geladen...",
+    "error": "Video Player Fehler",
+    "mediaNotFound": "Medium nicht gefunden",
+    "unsupportedBrowser": "Ihr Browser unterstützt dieses Videoformat nicht"
   },
   "notifications": {
     "folderSelected": "Medien-Ordner erfolgreich ausgewählt",

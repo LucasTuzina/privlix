@@ -55,7 +55,7 @@
   .settings-container h1 {
     color: #ffffff;
     font-size: 32px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .settings-section {

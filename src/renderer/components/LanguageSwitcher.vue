@@ -4,7 +4,7 @@
       :value="currentLocale"
       @change="changeLanguage"
       class="language-select"
-      :title="$t('settings.language')"
+      title="Language"
     >
       <option value="en">EN</option>
       <option value="de">DE</option>

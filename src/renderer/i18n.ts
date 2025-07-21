@@ -30,21 +30,21 @@ const getDefaultLocale = (): string => {
 export const i18n = createI18n({
   locale: getDefaultLocale(),
   fallbackLocale: 'en',
-  legacy: false,
+  legacy: true,
   globalInjection: true,
   messages,
 })
 
 // Function to change language and persist in localStorage
 export const setLocale = (locale: string) => {
-  i18n.global.locale.value = locale as 'en' | 'de'
+  i18n.global.locale = locale as 'en' | 'de'
   localStorage.setItem('privlix-locale', locale)
   document.documentElement.lang = locale
 }
 
 // Get current locale
 export const getCurrentLocale = (): string => {
-  return i18n.global.locale.value
+  return i18n.global.locale as string
 }
 
 // Get available locales

@@ -157,7 +157,7 @@
   .welcome-description {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     line-height: 1.6;
   }
 
@@ -165,7 +165,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
   }
 
   .welcome-actions {
@@ -259,6 +259,11 @@
     .welcome-container {
       min-height: calc(100vh - 100px);
       gap: 40px;
+    }
+
+    .welcome-logo {
+      display: flex;
+      justify-content: center;
     }
 
     .welcome-title {

@@ -8,7 +8,10 @@
           v-if="featuredMedia"
           class="hero-actions"
         >
-          <button class="btn-play">
+          <button
+            class="btn-play"
+            @click="handlePlayClick"
+          >
             <svg
               width="20"
               height="20"
@@ -17,9 +20,12 @@
             >
               <path d="M8 5v14l11-7z" />
             </svg>
-            Play
+            {{ $t('hero.play') }}
           </button>
-          <button class="btn-info">
+          <button
+            class="btn-info"
+            @click="handleInfoClick"
+          >
             <svg
               width="20"
               height="20"
@@ -30,7 +36,7 @@
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
               />
             </svg>
-            More Info
+            {{ $t('hero.moreInfo') }}
           </button>
         </div>
       </div>
@@ -39,34 +45,50 @@
 </template>
 
 <script setup lang="ts">
-  import type { Movie, Series } from '../../domain/entities/MediaTypes'
+  import type { MediaItem, MediaCollection } from '../../shared/types/MediaTypes'
 
   interface Props {
-    featuredMedia?: Movie | Series | null
+    featuredMedia?: MediaItem | MediaCollection | null
   }
 
-  defineProps<Props>()
+  const props = defineProps<Props>()
 
-  const getMediaTitle = (media: Movie | Series): string => {
-    if ('title' in media) {
-      return media.title // Movie
+  const emit = defineEmits<{
+    'play-media': [media: MediaItem | MediaCollection]
+    'show-info': [media: MediaItem | MediaCollection]
+  }>()
+
+  // Handler für Play Button
+  const handlePlayClick = (): void => {
+    if (props.featuredMedia) {
+      emit('play-media', props.featuredMedia)
     }
-    return media.name // Series
+  }
+
+  // Handler für Info Button
+  const handleInfoClick = (): void => {
+    if (props.featuredMedia) {
+      emit('show-info', props.featuredMedia)
+    }
+  }
+
+  const getMediaTitle = (media: MediaItem | MediaCollection): string => {
+    return media.title
   }
 </script>
 
 <style scoped>
   .hero-section {
-    height: 500px; /* Increased height to account for navbar overlay */
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    height: var(--hero-height-desktop);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
     display: flex;
     align-items: center;
-    padding: 70px 60px 40px; /* Top padding for navbar space */
-    margin-bottom: 40px;
+    padding: var(--navbar-height) var(--spacing-3xl) var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
     position: relative;
     overflow: hidden;
-    margin-top: -70px; /* Pull up to go behind navbar */
-    padding-top: 140px; /* Adjust padding to account for navbar */
+    margin-top: calc(-1 * var(--navbar-height));
+    padding-top: 120px;
   }
 
   .hero-background {
@@ -77,38 +99,40 @@
     bottom: 0;
     background: linear-gradient(
       to right,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.4) 50%,
+      var(--bg-overlay) 0%,
+      var(--bg-overlay-light) 50%,
       transparent 100%
     );
   }
 
   .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: var(--z-base);
+    padding: var(--spacing-2xl);
+    margin-top: 260px;
     max-width: 600px;
   }
 
   .hero-content h1 {
-    color: #ffffff;
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    color: var(--text-primary);
+    font-size: var(--font-4xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-md);
+    line-height: var(--leading-tight);
+    text-shadow: 0 2px 8px var(--shadow-heavy);
   }
 
   .hero-content p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 30px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    color: var(--text-secondary);
+    font-size: var(--font-lg);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 1px 4px var(--shadow-heavy);
   }
 
   .hero-actions {
     display: flex;
-    gap: 16px;
+    gap: var(--spacing-md);
     align-items: center;
   }
 
@@ -116,56 +140,66 @@
   .btn-info {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
+    gap: var(--spacing-sm);
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: var(--radius-md);
+    font-size: var(--font-base);
+    font-weight: var(--font-semibold);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
+    height: auto;
+    min-height: 44px;
   }
 
   .btn-play {
-    background: #ffffff;
-    color: #000000;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
   }
 
   .btn-play:hover {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--btn-primary-hover);
     transform: scale(1.05);
   }
 
   .btn-info {
-    background: rgba(109, 109, 110, 0.7);
-    color: #ffffff;
+    background: var(--btn-secondary-bg);
+    color: var(--text-primary);
   }
 
   .btn-info:hover {
-    background: rgba(109, 109, 110, 0.9);
+    background: var(--btn-secondary-hover);
     transform: scale(1.05);
   }
 
   @media (max-width: 768px) {
     .hero-section {
-      height: 400px;
-      padding: 70px 20px 20px; /* Adjusted padding for mobile */
-      margin-top: -70px; /* Keep the navbar overlay effect */
-      padding-top: 120px; /* Adjusted for mobile navbar */
+      height: var(--hero-height-mobile);
+      padding: var(--navbar-height) var(--spacing-lg) var(--spacing-md);
+      margin-top: calc(-1 * var(--navbar-height));
+      padding-top: 100px;
     }
 
     .hero-content h1 {
-      font-size: 32px;
+      font-size: var(--font-3xl);
+      margin-bottom: var(--spacing-sm);
     }
 
     .hero-content p {
-      font-size: 16px;
+      font-size: var(--font-base);
+      margin-bottom: var(--spacing-lg);
     }
 
     .hero-actions {
       flex-direction: column;
       align-items: flex-start;
-      gap: 12px;
+      gap: 10px;
+    }
+
+    .btn-play,
+    .btn-info {
+      padding: var(--spacing-sm) var(--spacing-md);
+      min-height: 40px;
     }
   }
 </style>

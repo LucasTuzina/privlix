@@ -18,8 +18,8 @@
         </div>
 
         <div class="stat-item">
-          <div class="stat-number">{{ stats.totalFiles }}</div>
-          <div class="stat-label">Total Files</div>
+          <div class="stat-number">{{ stats.watchedItems }}</div>
+          <div class="stat-label">Watched Items</div>
         </div>
       </div>
 
@@ -31,10 +31,10 @@
 </template>
 
 <script setup lang="ts">
-  import type { MediaStats } from '@domain/entities/MediaTypes'
+  import type { MediaLibraryStats } from '../../shared/types/MediaTypes'
 
   interface Props {
-    stats: MediaStats
+    stats: MediaLibraryStats
   }
 
   withDefaults(defineProps<Props>(), {
@@ -42,8 +42,8 @@
       totalMovies: 0,
       totalSeries: 0,
       totalEpisodes: 0,
-      totalFiles: 0,
-      totalSize: 0,
+      watchedItems: 0,
+      totalWatchTime: 0,
     }),
   })
 </script>
@@ -52,7 +52,6 @@
   .stats-footer {
     background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
     padding: 40px 60px 20px;
-    margin-top: 60px;
   }
 
   .stats-container {
@@ -64,7 +63,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
   }
 
   .stat-item {
@@ -79,7 +78,6 @@
     font-size: 36px;
     font-weight: 700;
     color: #e50914;
-    margin-bottom: 8px;
   }
 
   .stat-label {

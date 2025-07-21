@@ -1,13 +1,6 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog, protocol } from 'electron'
 import path from 'path'
-import { MediaApplicationService } from '../application/services/MediaApplicationService'
-import { MediaQueries } from '../application/queries/MediaQueries'
-import {
-  ScanMediaFolderCommand,
-  UpdateWatchProgressCommand,
-} from '../application/commands/MediaCommands'
-import { InMemoryMediaRepository } from '../infrastructure/repositories/InMemoryMediaRepository'
-import { ChokidarFileSystemRepository } from '../infrastructure/repositories/ChokidarFileSystemRepository'
+import { MediaService } from '../shared/services/MediaService'
 
 /**
  * Main Electron Process
@@ -15,20 +8,12 @@ import { ChokidarFileSystemRepository } from '../infrastructure/repositories/Cho
  */
 class MainProcess {
   private mainWindow: BrowserWindow | null = null
-  private mediaService: MediaApplicationService
+  private mediaService: MediaService
   private readonly isDevelopment: boolean
 
   constructor() {
     this.isDevelopment = process.env.NODE_ENV !== 'production'
-
-    // Setup dependency injection
-    const fileSystemRepo = new ChokidarFileSystemRepository()
-    const mediaRepo = new InMemoryMediaRepository(fileSystemRepo)
-    const mediaQueries = new MediaQueries(mediaRepo)
-    const scanCommand = new ScanMediaFolderCommand(mediaRepo)
-    const watchProgressCommand = new UpdateWatchProgressCommand(mediaRepo)
-
-    this.mediaService = new MediaApplicationService(mediaQueries, scanCommand, watchProgressCommand)
+    this.mediaService = new MediaService()
   }
 
   private createWindow(): void {
@@ -41,6 +26,9 @@ class MainProcess {
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true,
+        allowRunningInsecureContent: false,
+        experimentalFeatures: false,
+        webSecurity: true,
         preload: path.join(__dirname, 'preload.js'),
       },
       show: false,
@@ -64,6 +52,14 @@ class MainProcess {
     })
   }
 
+  private setupFileProtocol(): void {
+    protocol.registerFileProtocol('privlix-file', (request, callback) => {
+      const url = request.url.replace('privlix-file://', '')
+      const decodedUrl = decodeURIComponent(url)
+      callback({ path: decodedUrl })
+    })
+  }
+
   private setupIPC(): void {
     // Select media folder
     ipcMain.handle('select-media-folder', async (): Promise<string | null> => {
@@ -75,49 +71,67 @@ class MainProcess {
 
       if (!result.canceled && result.filePaths.length > 0) {
         const folderPath = result.filePaths[0]
-        await this.mediaService.scanMediaFolder(folderPath)
+        await this.mediaService.scanLibraries([folderPath])
         return folderPath
       }
       return null
     })
 
-    // Get media library
+    // Get all media
     ipcMain.handle('get-media-library', async () => {
-      return await this.mediaService.getMediaLibrary()
+      return {
+        movies: this.mediaService.getMediaByType('movie'),
+        series: this.mediaService.getAllCollections(),
+      }
     })
 
     // Get media stats
     ipcMain.handle('get-media-stats', async () => {
-      return await this.mediaService.getMediaStats()
+      return this.mediaService.getLibraryStats()
     })
 
     // Search media
     ipcMain.handle('search-media', async (_, query: string) => {
-      return await this.mediaService.searchMedia(query)
+      return this.mediaService.searchMedia(query)
     })
 
     // Update watch progress
     ipcMain.handle(
       'update-watch-progress',
-      async (_, mediaId: string, progress: number, timestamp?: number) => {
-        const date = timestamp ? new Date(timestamp) : new Date()
-        return await this.mediaService.updateWatchProgress(mediaId, progress, date)
+      async (_, filePath: string, currentTime: number, duration: number) => {
+        this.mediaService.updateWatchProgress(filePath, currentTime, duration)
+        return { success: true }
       }
     )
 
-    // Get recently watched
+    // Get recently watched / continue watching
     ipcMain.handle('get-recently-watched', async () => {
-      return await this.mediaService.getRecentlyWatched()
+      return this.mediaService.getContinueWatching()
     })
 
-    // Get media by ID
+    // Get media by ID (file path)
     ipcMain.handle('get-media-by-id', async (_, id: string) => {
-      return await this.mediaService.getMediaById(id)
+      const allMedia = this.mediaService.getAllMedia()
+      return allMedia.find(media => media.id === id) || null
     })
   }
 
   public init(): void {
+    // Registriere custom protocol für lokale Dateien vor app.whenReady()
+    protocol.registerSchemesAsPrivileged([
+      {
+        scheme: 'privlix-file',
+        privileges: {
+          secure: true,
+          supportFetchAPI: true,
+          corsEnabled: false,
+          stream: true,
+        },
+      },
+    ])
+
     app.whenReady().then(() => {
+      this.setupFileProtocol()
       this.createWindow()
       this.setupIPC()
 

@@ -21,7 +21,11 @@
       class="content-wrapper"
     >
       <!-- Hero Section with Featured Content -->
-      <HeroSection :featured-media="featuredMedia" />
+      <HeroSection
+        :featured-media="featuredMedia"
+        @play-media="handlePlayMedia"
+        @show-info="handleShowInfo"
+      />
 
       <!-- Content sections with proper padding -->
       <div class="content-sections">
@@ -32,6 +36,7 @@
           :items="mediaStore.recentlyWatched"
           type="continue"
           show-progress
+          @media-select="handleMediaSelect"
         />
 
         <!-- Movies -->
@@ -41,6 +46,7 @@
           :subtitle="$t('mediaRows.sortedAlphabetically')"
           :items="mediaStore.moviesSorted"
           type="movies"
+          @media-select="handleMediaSelect"
         />
 
         <!-- Series -->
@@ -50,6 +56,7 @@
           :subtitle="$t('mediaRows.sortedAlphabetically')"
           :items="mediaStore.seriesSorted"
           type="series"
+          @media-select="handleMediaSelect"
         />
 
         <!-- Statistics Footer -->
@@ -60,18 +67,28 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
+  import { useRouter } from 'vue-router'
   import { useMediaStore } from '../stores/mediaStore'
   import WelcomeScreen from '../components/WelcomeScreen.vue'
   import HeroSection from '../components/HeroSection.vue'
   import MediaRow from '../components/MediaRow.vue'
   import StatsFooter from '../components/StatsFooter.vue'
-  import type { Movie, Series } from '../../domain/entities/MediaTypes'
+  import type { MediaItem, MediaCollection } from '../../shared/types/MediaTypes'
 
   const mediaStore = useMediaStore()
+  const router = useRouter()
 
-  const featuredMedia = computed((): Movie | Series | null => {
-    // Select random movie or first series for Hero Section
+  // State für ausgewähltes featured Media
+  const selectedFeaturedMedia = ref<MediaItem | MediaCollection | null>(null)
+
+  const featuredMedia = computed((): MediaItem | MediaCollection | null => {
+    // Wenn ein Media ausgewählt wurde, zeige das an
+    if (selectedFeaturedMedia.value) {
+      return selectedFeaturedMedia.value
+    }
+
+    // Sonst zeige random movie oder first series for Hero Section
     const allContent = [...mediaStore.mediaLibrary.movies, ...mediaStore.mediaLibrary.series]
 
     if (allContent.length === 0) return null
@@ -79,6 +96,37 @@
     const randomIndex = Math.floor(Math.random() * allContent.length)
     return allContent[randomIndex]
   })
+
+  // Handler für Media-Auswahl aus MediaRow
+  const handleMediaSelect = (media: MediaItem | MediaCollection): void => {
+    // Setze das Media als featured
+    selectedFeaturedMedia.value = media
+
+    // Optional: Automatisch abspielen nach kurzer Verzögerung
+    setTimeout(() => {
+      handlePlayMedia(media)
+    }, 100)
+  }
+
+  // Handler für Play Button im HeroSection
+  const handlePlayMedia = (media: MediaItem | MediaCollection): void => {
+    console.log('Playing media:', media)
+
+    if ('filePath' in media) {
+      // Single MediaItem - navigiere zum Player mit URL-encoded ID
+      const encodedId = encodeURIComponent(media.id)
+      router.push(`/player/${encodedId}`)
+    } else if ('episodes' in media && media.episodes.length > 0) {
+      // MediaCollection - spiele erste Episode ab
+      const firstEpisode = media.episodes[0]
+      const encodedId = encodeURIComponent(firstEpisode.id)
+      router.push(`/player/${encodedId}`)
+    }
+  } // Handler für More Info Button im HeroSection
+  const handleShowInfo = (media: MediaItem | MediaCollection): void => {
+    console.log('Showing info for:', media)
+    // TODO: Show detailed info modal or navigate to detail page
+  }
 
   onMounted(async () => {
     // Load data when component mounts
@@ -94,11 +142,11 @@
   }
 
   .content-wrapper {
-    padding-bottom: 40px;
+    padding-bottom: var(--spacing-2xl);
   }
 
   .content-sections {
-    padding: 0 20px; /* Add horizontal padding for content sections */
+    padding: 0 var(--spacing-lg);
   }
 
   .loading-overlay {
@@ -107,28 +155,29 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--bg-overlay);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: var(--z-modal);
+    backdrop-filter: blur(4px);
   }
 
   .loading-spinner {
     width: 60px;
     height: 60px;
-    border: 4px solid #333;
-    border-top: 4px solid #e50914;
-    border-radius: 50%;
+    border: 4px solid var(--bg-tertiary);
+    border-top: 4px solid var(--privlix-red);
+    border-radius: var(--radius-round);
     animation: spin 1s linear infinite;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
   }
 
   .loading-overlay p {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 500;
+    color: var(--text-primary);
+    font-size: var(--font-lg);
+    font-weight: var(--font-medium);
   }
 
   @keyframes spin {

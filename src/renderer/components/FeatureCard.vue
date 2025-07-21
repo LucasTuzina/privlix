@@ -129,6 +129,7 @@
   @media (max-width: 768px) {
     .feature-icon {
       font-size: 28px;
+      justify-content: center;
     }
 
     .feature-title {

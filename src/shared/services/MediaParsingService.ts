@@ -1,12 +1,5 @@
-import type { MediaType } from '../entities/MediaTypes'
-
-export interface MediaParsingResult {
-  title: string
-  type: MediaType
-  seriesName?: string
-  seasonNumber?: number
-  episodeNumber?: number
-}
+import path from 'path'
+import type { MediaParsingResult } from '../types/MediaTypes'
 
 export class MediaParsingService {
   private static readonly SERIES_PATTERNS = [
@@ -15,24 +8,10 @@ export class MediaParsingService {
     /^(.+?)[.\s]+Season[.\s]*(\d+)[.\s]*Episode[.\s]*(\d+)/i,
   ]
 
-  private static readonly SUPPORTED_FORMATS = [
-    '.mp4',
-    '.mkv',
-    '.avi',
-    '.mov',
-    '.wmv',
-    '.flv',
-    '.webm',
-    '.m4v',
-  ]
-
-  static parseMediaInfo(
-    fileName: string,
-    // eslint-disable-next-line no-unused-vars
-    _directoryName: string,
-    // eslint-disable-next-line no-unused-vars
-    _filePath: string
-  ): MediaParsingResult {
+  /**
+   * Parse media info from filename
+   */
+  static parseMediaInfo(fileName: string): MediaParsingResult {
     // Remove file extension
     const cleanName = this.removeFileExtension(fileName)
 
@@ -50,9 +29,6 @@ export class MediaParsingService {
       }
     }
 
-    // Check if multiple videos in same directory (series)
-    // This would require file system access, so we'll handle it in the service layer
-
     // Default to movie
     return {
       title: this.cleanTitle(cleanName),
@@ -60,18 +36,8 @@ export class MediaParsingService {
     }
   }
 
-  static isSupportedFormat(fileName: string): boolean {
-    const ext = this.getFileExtension(fileName).toLowerCase()
-    return this.SUPPORTED_FORMATS.includes(ext)
-  }
-
   private static removeFileExtension(fileName: string): string {
-    return fileName.replace(/\.[^/.]+$/, '')
-  }
-
-  private static getFileExtension(fileName: string): string {
-    const match = fileName.match(/\.[^/.]+$/)
-    return match ? match[0] : ''
+    return path.parse(fileName).name
   }
 
   private static cleanTitle(title: string): string {

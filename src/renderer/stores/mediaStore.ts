@@ -1,17 +1,16 @@
 import { defineStore } from 'pinia'
 import type {
   MediaLibrary,
-  MediaStats,
-  MediaFile,
-  Series,
-  SearchResult,
-} from '@domain/entities/MediaTypes'
+  MediaLibraryStats,
+  MediaItem,
+  MediaCollection,
+} from '../../shared/types/MediaTypes'
 
 export interface MediaStoreState {
   mediaLibrary: MediaLibrary
-  mediaStats: MediaStats
-  recentlyWatched: MediaFile[]
-  searchResults: SearchResult<MediaFile>[]
+  mediaStats: MediaLibraryStats
+  recentlyWatched: MediaItem[]
+  searchResults: MediaItem[]
   isLoading: boolean
   selectedFolder: string | null
   currentQuery: string
@@ -27,8 +26,8 @@ export const useMediaStore = defineStore('media', {
       totalMovies: 0,
       totalSeries: 0,
       totalEpisodes: 0,
-      totalFiles: 0,
-      totalSize: 0,
+      watchedItems: 0,
+      totalWatchTime: 0,
     },
     recentlyWatched: [],
     searchResults: [],
@@ -39,21 +38,21 @@ export const useMediaStore = defineStore('media', {
 
   getters: {
     // Alphabetically sorted movies
-    moviesSorted(): MediaFile[] {
+    moviesSorted(): MediaItem[] {
       return this.mediaLibrary.movies.sort((a, b) =>
         a.title.localeCompare(b.title, 'en', { numeric: true })
       )
     },
 
     // Alphabetically sorted series
-    seriesSorted(): Series[] {
-      return this.mediaLibrary.series.sort((a: Series, b: Series) =>
-        a.name.localeCompare(b.name, 'en', { numeric: true })
+    seriesSorted(): MediaCollection[] {
+      return this.mediaLibrary.series.sort((a: MediaCollection, b: MediaCollection) =>
+        a.title.localeCompare(b.title, 'en', { numeric: true })
       )
     },
 
     // All media combined for search
-    allMedia(): MediaFile[] {
+    allMedia(): MediaItem[] {
       const movies = this.mediaLibrary.movies
       const seriesEpisodes = this.mediaLibrary.series.flatMap(s => s.episodes)
       return [...movies, ...seriesEpisodes]
@@ -124,9 +123,13 @@ export const useMediaStore = defineStore('media', {
       }
     },
 
-    async updateWatchProgress(mediaId: string, progress: number): Promise<void> {
+    async updateWatchProgress(
+      filePath: string,
+      currentTime: number,
+      duration: number
+    ): Promise<void> {
       try {
-        await window.electronAPI.updateWatchProgress(mediaId, progress, Date.now())
+        await window.electronAPI.updateWatchProgress(filePath, currentTime, duration)
         await this.loadRecentlyWatched()
       } catch (error) {
         console.error('Error updating watch progress:', error)
@@ -134,7 +137,7 @@ export const useMediaStore = defineStore('media', {
     },
 
     // Helper methods
-    getMediaById(id: string): MediaFile | undefined {
+    getMediaById(id: string): MediaItem | undefined {
       return this.allMedia.find(media => media.id === id)
     },
 

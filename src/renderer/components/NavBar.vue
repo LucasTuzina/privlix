@@ -147,15 +147,15 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 70px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    height: var(--navbar-height);
+    background: linear-gradient(180deg, var(--bg-overlay) 0%, transparent 100%);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 0 3%;
+    padding: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
   }
 
   .navbar:hover {

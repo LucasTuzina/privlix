@@ -15,9 +15,9 @@ const electronAPI = {
   getVideoInfo: (filePath: string) => ipcRenderer.invoke('get-video-info', filePath),
 
   // File system
-  getFilePath: (filePath: string) => `file://${filePath}`,
+  getFilePath: (filePath: string) => `privlix-file://${encodeURIComponent(filePath)}`,
   getThumbnailPath: (thumbnailPath: string | null) =>
-    thumbnailPath ? `file://${thumbnailPath}` : null,
+    thumbnailPath ? `privlix-file://${encodeURIComponent(thumbnailPath)}` : null,
 }
 
 // Expose API to main world

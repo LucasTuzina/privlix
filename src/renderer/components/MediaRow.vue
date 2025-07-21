@@ -14,6 +14,7 @@
         v-for="item in items"
         :key="getItemKey(item)"
         class="media-item"
+        @click="handleMediaClick(item)"
       >
         <div class="media-card">
           <div class="media-image">
@@ -40,107 +41,110 @@
 </template>
 
 <script setup lang="ts">
-  import { useMediaStore } from '../stores/mediaStore'
-  import type { MediaFile, Series } from '@domain/entities/MediaTypes'
+  import type { MediaItem, MediaCollection } from '../../shared/types/MediaTypes'
 
   interface Props {
     title: string
     subtitle?: string
-    items: (MediaFile | Series)[]
+    items: (MediaItem | MediaCollection)[]
     type: 'movies' | 'series' | 'continue'
     showProgress?: boolean
   }
 
   defineProps<Props>()
 
-  const mediaStore = useMediaStore()
+  const emit = defineEmits<{
+    'media-select': [media: MediaItem | MediaCollection]
+  }>()
 
-  const getThumbnail = (item: MediaFile | Series): string | null => {
+  // Handler für Media Click
+  const handleMediaClick = (media: MediaItem | MediaCollection): void => {
+    emit('media-select', media)
+  }
+
+  const getThumbnail = (item: MediaItem | MediaCollection): string | null => {
     if ('episodes' in item && item.episodes.length > 0) {
-      // Series - use first episode's thumbnail
-      return mediaStore.getThumbnailUrl(item.episodes[0].thumbnailPath)
-    } else if ('thumbnailPath' in item) {
-      // MediaFile
-      return mediaStore.getThumbnailUrl(item.thumbnailPath)
+      // MediaCollection - use first episode's thumbnail
+      return null // TODO: implement thumbnail path
+    } else if ('filePath' in item) {
+      // MediaItem
+      return null // TODO: implement thumbnail path
     }
     return null
   }
 
-  const getTitle = (item: MediaFile | Series): string => {
-    if ('name' in item) {
-      return item.name // Series
-    }
-    return item.title || 'Unknown' // MediaFile
+  const getTitle = (item: MediaItem | MediaCollection): string => {
+    return item.title || 'Unknown'
   }
 
-  const getSubtitle = (item: MediaFile | Series): string => {
-    if ('name' in item) {
-      // Series
-      return `${item.totalEpisodes} Episodes`
+  const getSubtitle = (item: MediaItem | MediaCollection): string => {
+    if ('episodes' in item) {
+      // MediaCollection
+      return `${item.episodeCount} Episodes`
     }
 
-    // MediaFile
-    const mediaFile = item as MediaFile
-    if (mediaFile.type === 'episode' && 'seriesName' in mediaFile) {
-      const episode = mediaFile as import('@domain/entities/MediaTypes').Episode
-      return `S${episode.seasonNumber}E${episode.episodeNumber}`
+    // MediaItem
+    const mediaItem = item as MediaItem
+    if (mediaItem.type === 'episode' && mediaItem.seriesName) {
+      return `S${mediaItem.seasonNumber}E${mediaItem.episodeNumber}`
     }
 
-    return mediaFile.type === 'movie' ? 'Movie' : 'Media'
+    return mediaItem.type === 'movie' ? 'Movie' : 'Media'
   }
 
-  const getItemKey = (item: MediaFile | Series): string => {
-    if ('name' in item) {
-      return `series-${item.name}`
-    }
+  const getItemKey = (item: MediaItem | MediaCollection): string => {
     return `media-${item.id}`
   }
 </script>
 
 <style scoped>
   .media-row {
-    margin-bottom: 40px;
-    padding: 0 60px;
+    margin-bottom: var(--spacing-2xl);
+    padding: 0 var(--spacing-lg);
   }
 
   .row-header {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
   }
 
   .row-header h2 {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 4px;
+    color: var(--text-primary);
+    font-size: var(--font-2xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-xs);
   }
 
   .subtitle {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 16px;
+    color: var(--text-tertiary);
+    font-size: var(--font-base);
     margin: 0;
   }
 
   .media-grid {
     display: grid;
+    padding: 0px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    gap: var(--spacing-md);
   }
 
   .media-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-fast);
     cursor: pointer;
+    border: 1px solid var(--border-primary);
   }
 
   .media-card:hover {
     transform: scale(1.05);
+    background: var(--bg-card-hover);
+    border-color: var(--border-secondary);
   }
 
   .media-image {
     aspect-ratio: 16/9;
-    background: #333;
+    background: var(--bg-tertiary);
     position: relative;
   }
 
@@ -153,30 +157,55 @@
   .placeholder-image {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #555 0%, #333 100%);
+    background: linear-gradient(135deg, var(--border-tertiary) 0%, var(--bg-tertiary) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: var(--font-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-muted);
   }
 
   .media-info {
-    padding: 12px;
+    padding: var(--spacing-sm);
   }
 
   .media-info h3 {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    line-height: 1.3;
+    color: var(--text-primary);
+    font-size: var(--font-base);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--spacing-xs);
+    line-height: var(--leading-tight);
   }
 
   .media-info p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
+    color: var(--text-tertiary);
+    font-size: var(--font-sm);
     margin: 0;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .media-row {
+      padding: 0 var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .media-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--spacing-sm);
+    }
+
+    .row-header h2 {
+      font-size: var(--font-xl);
+    }
+
+    .subtitle {
+      font-size: var(--font-sm);
+    }
+
+    .placeholder-image {
+      font-size: var(--font-2xl);
+    }
   }
 </style>

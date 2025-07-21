@@ -71,7 +71,10 @@
   },
   "videoPlayer": {
     "title": "Video Player",
-    "loading": "Loading player..."
+    "loading": "Loading player...",
+    "error": "Video Player Error",
+    "mediaNotFound": "Media not found",
+    "unsupportedBrowser": "Your browser does not support this video format"
   },
   "notifications": {
     "folderSelected": "Media folder selected successfully",
