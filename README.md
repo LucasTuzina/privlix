@@ -1,65 +1,211 @@
 # Privlix
 
-A private media library with Netflix-style interface for local video collections, built with modern Domain-Driven Design principles.
+> **🎬 Your Personal Netflix Experience for Local Media**
 
-## Features
+A modern, privacy-focused media library application with Netflix-style interface for organizing and watching your local video collections. Built with Electron, Vue 3, and TypeScript.
 
-- 🎬 **Automatic Media Detection**: Scans folders and automatically recognizes movies and series
-- 📺 **Netflix-Style Interface**: Modern, user-friendly interface with dark theme
-- 🔍 **Intelligent Search**: Fast search through entire media library using fuzzy matching
-- 📱 **Responsive Design**: Works on various screen sizes
-- 🔒 **100% Private**: All data stays local on your computer
-- 📂 **Series/Movie Recognition**: Automatic categorization based on file structure
-- ⏯️ **Watch Progress**: Remembers where you left off
-- 🏗️ **Domain-Driven Design**: Clean architecture with separated concerns
-- 📝 **TypeScript**: Full type safety and modern development experience
-- 🌍 **Internationalization**: English and German language support
+![Version](https://img.shields.io/badge/version-0.1.0--alpha-orange)
+![Status](https://img.shields.io/badge/status-alpha%20testing-yellow)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## Quick Start
+---
 
-1. **Install dependencies**:
+## ✨ Current Features (Alpha v0.1.0)
+
+### � **Core Functionality**
+
+- **📁 Smart Media Detection** - Automatically scans and organizes your video folders
+- **🎬 Movie & Series Recognition** - Intelligent categorization based on file names and structure
+- **🔍 Powerful Search** - Fast fuzzy search across your entire media library
+- **⏯️ Custom Video Player** - Netflix-style player with custom controls and progress tracking
+- **� Watch Progress** - Remembers where you stopped watching each video
+- **🎨 Modern UI/UX** - Dark theme with Netflix-inspired responsive design
+
+### 🛠️ **Technical Features**
+
+- **🔒 100% Privacy** - All data stays local on your computer
+- **🌍 Multi-Language** - English and German language support
+- **💻 Cross-Platform** - Works on macOS, Windows, and Linux
+- **📱 Responsive** - Optimized for various screen sizes
+- **⚡ Fast Performance** - Built with modern web technologies
+
+### 🎮 **User Experience**
+
+- **🏠 Home Dashboard** - Overview of your media collection with continue watching
+- **📂 Folder Management** - Easy media folder selection and management
+- **⚙️ Settings Panel** - Customize language, folder paths, and preferences
+- **🎥 Fullscreen Support** - Immersive video watching experience
+- **⌨️ Keyboard Shortcuts** - Space (play/pause), F (fullscreen), M (mute), Escape (back)
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** (v18 or higher)
+- **npm** (comes with Node.js)
+
+### Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/LucasTuzina/privlix.git
+   cd privlix
+   ```
+
+2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
-2. **Start development**:
+3. **Start development server**:
+
    ```bash
    npm run dev
    ```
 
-3. **First Use**: 
-   - Launch the app and click "Select Media Folder"
-   - Choose your video directory
-   - The app will automatically scan and organize your collection
+4. **First Setup**:
+   - Launch the application
+   - Click "Select Media Folder" on the welcome screen
+   - Choose your video directory (e.g., `/Users/yourname/Movies`)
+   - Wait for the automatic media scan to complete
+   - Start watching your collection!
 
-## Documentation
+### Build for Production
 
-📚 **Complete documentation is available in the `/docs` folder:**
+```bash
+# Build the application
+npm run build
 
-- 📋 **[Installation & Development](docs/installation.md)** - Setup, scripts, and tech stack
-- 🏗️ **[Architecture](docs/architecture.md)** - Domain-Driven Design and principles  
-- 📁 **[Project Structure](docs/project-structure.md)** - Directory organization and explanations
-- 🎨 **[Layout System](docs/layout-system.md)** - Modular layout components and usage
-- 🔧 **[Logo Component](docs/logo_usage.md)** - Reusable logo component documentation
-- 🌍 **[Internationalization](docs/i18n.md)** - Multi-language support and setup
-- ✅ **[Migration Status](docs/migration-status.md)** - TypeScript & Composition API migration progress
-- 📖 **[Usage Guide](docs/usage.md)** - How to use the application effectively
-- 🚀 **[Roadmap](docs/roadmap.md)** - Future features and development plans
+# Package for distribution (macOS example)
+npm run dist
+```
 
-## Status
+---
 
-**Current Version**: Development Preview  
-**Migration Status**: ✅ Complete - All components migrated to TypeScript & Composition API  
-**Build Status**: ✅ All builds passing  
-**Language Support**: 🇺🇸 English, 🇩🇪 German  
+## 📖 Documentation
 
-## Contributing
+For detailed information, please check our comprehensive documentation in the `/docs` folder:
 
-Contributions are welcome! Please read our documentation for:
-- Development setup and principles
-- Code standards and architecture guidelines  
-- Feature roadmap and priorities
+| Document                                              | Description                                              |
+| ----------------------------------------------------- | -------------------------------------------------------- |
+| 📋 **[Installation Guide](docs/installation.md)**     | Detailed setup, development, and deployment instructions |
+| 🏗️ **[Architecture Overview](docs/architecture.md)**  | Technical architecture and design patterns               |
+| 📁 **[Project Structure](docs/project-structure.md)** | Directory organization and code structure                |
+| 🎨 **[UI Components](docs/layout-system.md)**         | Layout system and component documentation                |
+| 🌍 **[Internationalization](docs/i18n.md)**           | Multi-language support implementation                    |
+| 📖 **[Usage Guide](docs/usage.md)**                   | How to effectively use the application                   |
+| 🚀 **[Development Roadmap](docs/roadmap.md)**         | Planned features and future development                  |
 
-## License
+---
 
-MIT License
+## ⚠️ Alpha Version Notice
+
+**This is an early alpha version (0.1.0) for testing purposes.**
+
+### What Works:
+
+✅ Media folder scanning and organization  
+✅ Movie and series recognition  
+✅ Video playback with custom controls  
+✅ Search functionality  
+✅ Watch progress tracking  
+✅ Settings and preferences  
+✅ Multi-language support
+
+### Known Limitations:
+
+⚠️ Limited video format support  
+⚠️ No automatic thumbnail generation  
+⚠️ No subtitle support yet  
+⚠️ Basic metadata handling  
+⚠️ Limited error handling for corrupted files
+
+### Planned for Beta:
+
+🔄 Enhanced video format support  
+🔄 Automatic thumbnail extraction  
+🔄 Subtitle support  
+🔄 Better metadata recognition  
+🔄 Cloud sync options
+
+---
+
+## 🔧 Development
+
+### Available Scripts
+
+```bash
+# Development
+npm run dev              # Start development with hot reload
+npm run dev:renderer     # Start renderer process only
+npm run dev:main         # Start main process only
+
+# Building
+npm run build           # Build for production
+npm run build:renderer  # Build renderer process
+npm run build:main      # Build main process
+
+# Quality Assurance
+npm run lint           # Check code style
+npm run lint:fix       # Fix code style issues
+npm run type-check     # TypeScript type checking
+
+# Distribution
+npm run dist           # Package for current platform
+npm run dist:mac       # Package for macOS
+npm run dist:win       # Package for Windows
+npm run dist:linux     # Package for Linux
+```
+
+### Tech Stack
+
+- **Frontend**: Vue 3 (Composition API), TypeScript, Vite
+- **Backend**: Electron (Node.js)
+- **Styling**: CSS Custom Properties, Modern CSS
+- **State Management**: Pinia
+- **Internationalization**: Vue I18n
+- **Architecture**: Domain-Driven Design principles
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! This project follows modern development practices:
+
+1. **Fork & Clone** the repository
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Follow code standards**: Use TypeScript, Vue 3 Composition API
+4. **Test your changes**: Ensure all functionality works
+5. **Submit a Pull Request** with detailed description
+
+### Development Guidelines
+
+- Use **TypeScript** for type safety
+- Follow **Vue 3 Composition API** patterns
+- Write **clean, documented code**
+- Follow **Domain-Driven Design** principles
+- Maintain **responsive design** standards
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙋‍♂️ Support
+
+- **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/LucasTuzina/privlix/issues)
+- **Documentation**: Check the `/docs` folder for detailed guides
+- **Development**: Follow our contributing guidelines for code contributions
+
+---
+
+<p align="center">
+  <strong>Built with ❤️ for privacy-conscious media enthusiasts</strong>
+</p>
