@@ -1,5 +1,14 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
+// Settings interface for type safety
+interface AppSettings {
+  selectedMediaFolder?: string
+  language?: 'en' | 'de'
+  theme?: 'dark' | 'light'
+  autoplay?: boolean
+  volume?: number
+}
+
 // API for renderer process - matches the existing ElectronAPI interface
 const electronAPI = {
   // Media management
@@ -13,6 +22,13 @@ const electronAPI = {
   updateWatchProgress: (mediaId: string, progress: number, timestamp: number) =>
     ipcRenderer.invoke('update-watch-progress', mediaId, progress, timestamp),
   getVideoInfo: (filePath: string) => ipcRenderer.invoke('get-video-info', filePath),
+
+  // Settings management
+  getSettings: () => ipcRenderer.invoke('get-settings'),
+  updateSettings: (newSettings: Partial<AppSettings>) =>
+    ipcRenderer.invoke('update-settings', newSettings),
+  getSelectedMediaFolder: () => ipcRenderer.invoke('get-selected-media-folder'),
+  unlinkMediaFolder: () => ipcRenderer.invoke('unlink-media-folder'),
 
   // File system
   getFilePath: (filePath: string) => `privlix-file://${encodeURIComponent(filePath)}`,

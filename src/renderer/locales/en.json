@@ -41,7 +41,10 @@
     "continueWatching": "Continue Watching",
     "allMovies": "All Movies",
     "allSeries": "All Series",
-    "sortedAlphabetically": "Sorted alphabetically"
+    "sortedAlphabetically": "Sorted alphabetically",
+    "movies": "Movies",
+    "series": "Series",
+    "episodes": "Episodes"
   },
   "stats": {
     "movies": "Movies",
@@ -67,7 +70,13 @@
     "changeFolder": "Change Folder",
     "general": "General",
     "playback": "Playback",
-    "appearance": "Appearance"
+    "appearance": "Appearance",
+    "mediaLibrary": "Media Library",
+    "currentFolder": "Current Folder",
+    "noFolderSelected": "No folder selected",
+    "selectFolder": "Select Folder",
+    "unlinkFolder": "Unlink Folder",
+    "libraryStats": "Library Statistics"
   },
   "videoPlayer": {
     "title": "Video Player",

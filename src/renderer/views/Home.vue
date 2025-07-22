@@ -129,6 +129,11 @@
   }
 
   onMounted(async () => {
+    // Lade gespeicherten Media-Ordner beim Mount
+    if (!mediaStore.selectedFolder) {
+      await mediaStore.loadSavedMediaFolder()
+    }
+
     // Load data when component mounts
     if (mediaStore.selectedFolder) {
       await mediaStore.loadMediaLibrary()

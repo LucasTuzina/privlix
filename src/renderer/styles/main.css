@@ -48,6 +48,9 @@
 
   /* Layout Dimensions */
   --navbar-height: 70px;
+  /* Basis-Höhe */
+  --navbar-height-macos: 126px;
+  /* Mit macOS Traffic Light Padding (70px + 28px + 28px extra) */
   --sidebar-width: 250px;
   --hero-height-desktop: 600px;
   --hero-height-mobile: 350px;

@@ -42,7 +42,7 @@
 
   /* Standard layout - content starts below navbar */
   .main-content.standard {
-    padding-top: 90px; /* Space for fixed NavBar (70px) + extra margin (20px) */
+    padding-top: 130px; /* Space for fixed NavBar (70px) + extra margin (20px) */
     padding-bottom: 40px;
   }
 

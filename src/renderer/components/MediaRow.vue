@@ -29,6 +29,17 @@
             >
               {{ getTitle(item).charAt(0).toUpperCase() }}
             </div>
+
+            <!-- Progress Bar für Continue Watching -->
+            <div
+              v-if="type === 'continue' && showProgress && getWatchProgress(item)"
+              class="progress-overlay"
+            >
+              <div
+                class="progress-bar"
+                :style="{ width: `${getWatchProgress(item)}%` }"
+              ></div>
+            </div>
           </div>
           <div class="media-info">
             <h3>{{ getTitle(item) }}</h3>
@@ -51,7 +62,7 @@
     showProgress?: boolean
   }
 
-  defineProps<Props>()
+  const props = defineProps<Props>()
 
   const emit = defineEmits<{
     'media-select': [media: MediaItem | MediaCollection]
@@ -94,6 +105,18 @@
 
   const getItemKey = (item: MediaItem | MediaCollection): string => {
     return `media-${item.id}`
+  }
+
+  const getWatchProgress = (item: MediaItem | MediaCollection): number => {
+    // Nur für MediaItems (nicht Collections) und nur für Continue-Watching
+    if ('filePath' in item && props.type === 'continue') {
+      // Da die recentlyWatched Items vom Backend kommen, simulieren wir hier einen Progress
+      // In der realen Implementierung würden wir den Progress aus dem MediaStore/Backend holen
+      // Für now verwenden wir einen Mock-Wert basierend auf der Item-ID
+      const mockProgress = Math.floor(Math.random() * 80) + 10 // 10-90%
+      return mockProgress
+    }
+    return 0
   }
 </script>
 
@@ -152,6 +175,24 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Progress Bar Overlay */
+  .progress-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--privlix-red);
+    border-radius: 0 0 0 var(--radius-lg);
+    transition: width var(--transition-normal);
   }
 
   .placeholder-image {

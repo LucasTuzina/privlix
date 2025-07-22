@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, protocol } from 'electron'
 import path from 'path'
 import { MediaService } from '../shared/services/MediaService'
+import { SettingsService } from '../shared/services/SettingsService'
 
 /**
  * Main Electron Process
@@ -9,11 +10,13 @@ import { MediaService } from '../shared/services/MediaService'
 class MainProcess {
   private mainWindow: BrowserWindow | null = null
   private mediaService: MediaService
+  private settingsService: SettingsService
   private readonly isDevelopment: boolean
 
   constructor() {
     this.isDevelopment = process.env.NODE_ENV !== 'production'
     this.mediaService = new MediaService()
+    this.settingsService = new SettingsService()
   }
 
   private createWindow(): void {
@@ -72,8 +75,29 @@ class MainProcess {
       if (!result.canceled && result.filePaths.length > 0) {
         const folderPath = result.filePaths[0]
         await this.mediaService.scanLibraries([folderPath])
+        // Speichere den ausgewählten Ordner in den Settings
+        this.settingsService.setSelectedMediaFolder(folderPath)
         return folderPath
       }
+      return null
+    })
+
+    // Settings Management
+    ipcMain.handle('get-settings', async () => {
+      return this.settingsService.getSettings()
+    })
+
+    ipcMain.handle('update-settings', async (_, newSettings) => {
+      this.settingsService.updateSettings(newSettings)
+      return this.settingsService.getSettings()
+    })
+
+    ipcMain.handle('get-selected-media-folder', async () => {
+      return this.settingsService.getSelectedMediaFolder()
+    })
+
+    ipcMain.handle('unlink-media-folder', async () => {
+      this.settingsService.unlinkMediaFolder()
       return null
     })
 
@@ -130,10 +154,23 @@ class MainProcess {
       },
     ])
 
-    app.whenReady().then(() => {
+    app.whenReady().then(async () => {
       this.setupFileProtocol()
       this.createWindow()
       this.setupIPC()
+
+      // Lade gespeicherten Media-Ordner beim App-Start
+      const savedMediaFolder = this.settingsService.getSelectedMediaFolder()
+      if (savedMediaFolder) {
+        try {
+          await this.mediaService.scanLibraries([savedMediaFolder])
+          console.log('Loaded saved media folder:', savedMediaFolder)
+        } catch (error) {
+          console.error('Error loading saved media folder:', error)
+          // Entferne ungültigen Ordner aus Settings
+          this.settingsService.unlinkMediaFolder()
+        }
+      }
 
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

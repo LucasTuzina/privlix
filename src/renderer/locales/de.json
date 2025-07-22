@@ -41,7 +41,10 @@
     "continueWatching": "Zuletzt angesehen",
     "allMovies": "Alle Filme",
     "allSeries": "Alle Serien",
-    "sortedAlphabetically": "Alphabetisch sortiert"
+    "sortedAlphabetically": "Alphabetisch sortiert",
+    "movies": "Filme",
+    "series": "Serien",
+    "episodes": "Episoden"
   },
   "stats": {
     "movies": "Filme",
@@ -67,7 +70,13 @@
     "changeFolder": "Ordner ändern",
     "general": "Allgemein",
     "playback": "Wiedergabe",
-    "appearance": "Erscheinungsbild"
+    "appearance": "Erscheinungsbild",
+    "mediaLibrary": "Mediathek",
+    "currentFolder": "Aktueller Ordner",
+    "noFolderSelected": "Kein Ordner ausgewählt",
+    "selectFolder": "Ordner auswählen",
+    "unlinkFolder": "Ordner entknüpfen",
+    "libraryStats": "Bibliothek-Statistiken"
   },
   "videoPlayer": {
     "title": "Video Player",

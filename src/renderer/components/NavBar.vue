@@ -26,7 +26,7 @@
     </div>
 
     <div class="nav-right">
-      <!-- Suchfeld -->
+      <!-- Search Field -->
       <div class="search-container">
         <input
           v-model="searchQuery"
@@ -147,15 +147,36 @@
     top: 0;
     left: 0;
     right: 0;
-    height: var(--navbar-height);
+    height: calc(var(--navbar-height) + 28px); /* Additional 28px for macOS Traffic Lights */
     background: linear-gradient(180deg, var(--bg-overlay) 0%, transparent 100%);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 40px;
+    padding: 68px 40px 40px 40px; /* Top padding for macOS Traffic Lights */
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: all var(--transition-normal);
+    -webkit-app-region: drag; /* Makes the navbar a drag area for macOS */
+  }
+
+  /* Interactive elements should not be draggable */
+  .navbar button,
+  .navbar input,
+  .navbar .search-container,
+  .navbar .logo,
+  .navbar .nav-controls,
+  .navbar .settings-button,
+  .navbar a,
+  .navbar [role='button'] {
+    -webkit-app-region: no-drag;
+  }
+
+  /* Fullscreen Styles - no macOS padding */
+  .navbar:fullscreen,
+  *:fullscreen .navbar {
+    height: var(--navbar-height);
+    padding: 40px;
+    -webkit-app-region: none;
   }
 
   .navbar:hover {

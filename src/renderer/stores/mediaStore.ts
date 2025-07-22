@@ -77,6 +77,39 @@ export const useMediaStore = defineStore('media', {
       }
     },
 
+    async loadSavedMediaFolder(): Promise<void> {
+      try {
+        const savedFolder = await window.electronAPI.getSelectedMediaFolder()
+        if (savedFolder) {
+          this.selectedFolder = savedFolder
+          await this.loadMediaLibrary()
+        }
+      } catch (error) {
+        console.error('Error loading saved media folder:', error)
+      }
+    },
+
+    async unlinkMediaFolder(): Promise<void> {
+      try {
+        await window.electronAPI.unlinkMediaFolder()
+        this.selectedFolder = null
+        this.mediaLibrary = { movies: [], series: [] }
+        this.recentlyWatched = []
+        this.searchResults = []
+        this.mediaStats = {
+          totalMovies: 0,
+          totalSeries: 0,
+          totalEpisodes: 0,
+          watchedItems: 0,
+          totalWatchTime: 0,
+        }
+        this.showNotification('Media folder unlinked successfully', 'success')
+      } catch (error) {
+        console.error('Error unlinking media folder:', error)
+        this.showNotification('Error unlinking folder', 'error')
+      }
+    },
+
     async loadMediaLibrary(): Promise<void> {
       this.isLoading = true
       try {

@@ -58,14 +58,14 @@
     'show-info': [media: MediaItem | MediaCollection]
   }>()
 
-  // Handler für Play Button
+  // Handler for play button
   const handlePlayClick = (): void => {
     if (props.featuredMedia) {
       emit('play-media', props.featuredMedia)
     }
   }
 
-  // Handler für Info Button
+  // Handler for info button
   const handleInfoClick = (): void => {
     if (props.featuredMedia) {
       emit('show-info', props.featuredMedia)
@@ -79,16 +79,19 @@
 
 <style scoped>
   .hero-section {
-    height: var(--hero-height-desktop);
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: var(--hero-height-desktop);
+    max-width: var(--content-max-width);
+    width: 100%;
     align-items: center;
     padding: var(--navbar-height) var(--spacing-3xl) var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
     position: relative;
     overflow: hidden;
-    margin-top: calc(-1 * var(--navbar-height));
-    padding-top: 120px;
+    margin-top: calc(-1 * var(--navbar-height-macos, var(--navbar-height))); /* macOS-aware */
+    padding-top: calc(var(--navbar-height-macos, var(--navbar-height)) + 50px); /* macOS-aware */
   }
 
   .hero-background {
@@ -176,8 +179,8 @@
     .hero-section {
       height: var(--hero-height-mobile);
       padding: var(--navbar-height) var(--spacing-lg) var(--spacing-md);
-      margin-top: calc(-1 * var(--navbar-height));
-      padding-top: 100px;
+      margin-top: calc(-1 * var(--navbar-height-macos, var(--navbar-height))); /* macOS-aware */
+      padding-top: calc(var(--navbar-height-macos, var(--navbar-height)) + 30px); /* macOS-aware */
     }
 
     .hero-content h1 {

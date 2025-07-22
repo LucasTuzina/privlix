@@ -4,6 +4,7 @@ import type {
   MediaLibraryStats,
   MediaLibrary,
 } from '../../shared/types/MediaTypes'
+import type { AppSettings } from '../../shared/services/SettingsService'
 
 export interface ElectronAPI {
   // Media folder management
@@ -24,6 +25,12 @@ export interface ElectronAPI {
     currentTime: number,
     duration: number
   ): Promise<{ success: boolean }>
+
+  // Settings management
+  getSettings(): Promise<AppSettings>
+  updateSettings(newSettings: Partial<AppSettings>): Promise<AppSettings>
+  getSelectedMediaFolder(): Promise<string | undefined>
+  unlinkMediaFolder(): Promise<null>
 
   // File system utilities
   getFilePath(filePath: string): string
