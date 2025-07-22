@@ -1,8 +1,7 @@
 # Privlix
-
-> **- **📁 Smart Media Detection\*\* - Automatically scans and organizes your video folders
-
-- **�🎬 Movie & Series Recognition** - Intelligent categorization based on file names and structure
+ 
+- **📁 Smart Media Detection** - Automatically scans and organizes your video folders
+- **🎬 Movie & Series Recognition** - Intelligent categorization based on file names and structure
 - **⏯️ Custom Video Player** - Netflix-style player with custom controls and progress tracking
 - **📊 Watch Progress** - Remembers where you stopped watching each video
 - **🎨 Modern UI/UX** - Dark theme with Netflix-inspired responsive design Personal Netflix Experience for Local Media\*\*
@@ -129,7 +128,10 @@ For detailed information, please check our comprehensive documentation in the `/
 ⚠️ No automatic thumbnail generation  
 ⚠️ No subtitle support yet  
 ⚠️ Basic metadata handling  
-⚠️ Limited error handling for corrupted files### Planned for Beta:
+⚠️ Limited error handling for corrupted files
+
+### Planned next Steps:
+
 🔄 Search and filtering functionality  
 🔄 Media descriptions and detailed info  
 🔄 "More Info" modal dialogs  
@@ -214,5 +216,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <p align="center">
-  <strong>Built with ❤️ for privacy-conscious media enthusiasts</strong>
+  <strong>Built for privacy-conscious media enthusiasts</strong>
 </p>
