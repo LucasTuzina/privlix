@@ -4,7 +4,7 @@
 - **🎬 Movie & Series Recognition** - Intelligent categorization based on file names and structure
 - **⏯️ Custom Video Player** - Netflix-style player with custom controls and progress tracking
 - **📊 Watch Progress** - Remembers where you stopped watching each video
-- **🎨 Modern UI/UX** - Dark theme with Netflix-inspired responsive design Personal Netflix Experience for Local Media\*\*
+- **🎨 Modern UI/UX** - Dark theme with Netflix-inspired responsive design Personal Netflix Experience for Local Media
 
 A modern, privacy-focused media library application with Netflix-style interface for organizing and watching your local video collections. Built with Electron, Vue 3, and TypeScript.
 
