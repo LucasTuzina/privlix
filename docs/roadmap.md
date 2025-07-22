@@ -27,7 +27,7 @@ Privlix development timeline and planned features for upcoming releases.
 - ✅ Vue 3 + TypeScript + Composition API
 - ✅ Electron desktop application
 - ✅ Pinia state management
-- ✅ Domain-driven architecture
+- ✅ Modular component architecture
 - ✅ Modern CSS with custom properties
 - ✅ Hot reload development environment
 

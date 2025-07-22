@@ -9,7 +9,7 @@ Welcome to the Privlix documentation. This documentation is organized into sever
 
 ## 🏗️ Architecture & Development
 
-- **[Architecture](architecture.md)** - Domain-Driven Design principles and layer separation
+- **[Architecture](architecture.md)** - Component architecture and modular organization
 - **[Project Structure](project-structure.md)** - Directory organization and code layout
 - **[Migration Status](migration-status.md)** - TypeScript and Composition API migration progress
 

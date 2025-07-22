@@ -22,7 +22,7 @@ Navigate through our comprehensive documentation:
   
   <div class="doc-card">
     <h3><a href="architecture">🏗️ Architecture</a></h3>
-    <p>Domain-Driven Design principles</p>
+    <p>Component architecture and organization</p>
   </div>
   
   <div class="doc-card">

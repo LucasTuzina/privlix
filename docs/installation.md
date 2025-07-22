@@ -304,7 +304,7 @@ npm run electron:rebuild
 
 - **Electron** for desktop application
 - **Node.js** with TypeScript
-- **Domain-Driven Design** architecture
+- **Modular architecture** with clean separation
 - **Chokidar** for file system watching
 - **Fuse.js** for intelligent search
 
@@ -313,7 +313,7 @@ npm run electron:rebuild
 The project follows modern development practices:
 
 - Clean Code principles
-- Domain-Driven Design patterns
+- Modular design patterns
 - TypeScript for type safety
 - Component-based architecture
 - Reactive state management

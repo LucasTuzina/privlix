@@ -1,42 +1,46 @@
 # Architecture
 
-## Domain-Driven Design Architecture
+## Component-Based Architecture
 
-Privlix follows Domain-Driven Design (DDD) principles with clean architecture separation:
+Privlix follows a modular component-based architecture with clear separation of concerns:
 
 ### Architecture Layers
-- **Domain**: Core business logic and entities
-- **Application**: Use cases, commands, and queries
-- **Infrastructure**: Data persistence and external services
-- **Presentation**: Vue.js components and stores
 
-### Domain Layer
-- **Entities**: `MediaFile`, `Movie`, `Episode`, `Series`, `WatchProgress`
-- **Value Objects**: `MediaStats`, `SearchResult`
-- **Services**: `MediaParsingService` for business logic
+- **Components**: Reusable UI components with TypeScript
+- **Stores**: Pinia state management for data flow
+- **Services**: Media scanning and file system operations
+- **Utilities**: Helper functions and shared logic
 
-### Application Layer
-- **Commands**: `ScanMediaFolderCommand`, `UpdateWatchProgressCommand`
-- **Queries**: `MediaQueries` for read operations
-- **Services**: `MediaApplicationService` orchestrating use cases
+### Component Layer
 
-### Infrastructure Layer
-- **Repositories**: `InMemoryMediaRepository`, `ChokidarFileSystemRepository`
-- **External Services**: File system operations, search indexing
+- **Core Components**: `MediaRow`, `VideoPlayer`, `NavBar`, `PrivlixLogo`
+- **Layout Components**: `AppLayout`, `WelcomeScreen`, `HeroSection`
+- **Utility Components**: `LanguageSwitcher`, `PrivlixButton`
+
+### Store Layer
+
+- **MediaStore**: Centralized media state management
+- **Settings**: Application preferences and configuration
+
+### Services Layer
+
+- **Media Services**: File scanning and media recognition
+- **File System**: Directory watching and file operations
 
 ## Development Principles
 
-- **Clean Architecture**: Clear separation of concerns
-- **SOLID Principles**: Single responsibility, open/closed, dependency inversion
-- **Type Safety**: Full TypeScript coverage
-- **Composition API**: Modern Vue.js patterns
-- **Reactive Programming**: Pinia stores with reactive state
-- **Dependency Injection**: Proper DI container setup
+- **Component Architecture**: Reusable, modular components
+- **Type Safety**: Full TypeScript coverage across all layers
+- **Composition API**: Modern Vue.js reactive patterns
+- **State Management**: Centralized Pinia stores
+- **Single Responsibility**: Each component has a clear purpose
+- **Separation of Concerns**: Clean boundaries between UI, logic, and data
 
 ## Architecture Benefits
 
-- **Testability**: Separated layers make unit testing easier
-- **Maintainability**: Clear boundaries between business logic and infrastructure
-- **Scalability**: Easy to add new features without breaking existing code
+- **Maintainability**: Clear component boundaries and responsibilities
+- **Reusability**: Modular components can be easily reused
 - **Type Safety**: TypeScript prevents runtime errors
 - **Developer Experience**: Modern tooling with hot reload and type checking
+- **Scalability**: Easy to extend with new components and features
+- **Testing**: Isolated components are easier to unit test

@@ -1,6 +1,11 @@
 # Privlix
 
-> **🎬 Your Personal Netflix Experience for Local Media**
+> **- **📁 Smart Media Detection\*\* - Automatically scans and organizes your video folders
+
+- **�🎬 Movie & Series Recognition** - Intelligent categorization based on file names and structure
+- **⏯️ Custom Video Player** - Netflix-style player with custom controls and progress tracking
+- **📊 Watch Progress** - Remembers where you stopped watching each video
+- **🎨 Modern UI/UX** - Dark theme with Netflix-inspired responsive design Personal Netflix Experience for Local Media\*\*
 
 A modern, privacy-focused media library application with Netflix-style interface for organizing and watching your local video collections. Built with Electron, Vue 3, and TypeScript.
 
@@ -111,21 +116,23 @@ For detailed information, please check our comprehensive documentation in the `/
 ✅ Media folder scanning and organization  
 ✅ Movie and series recognition  
 ✅ Video playback with custom controls  
-✅ Search functionality  
 ✅ Watch progress tracking  
 ✅ Settings and preferences  
 ✅ Multi-language support
 
 ### Known Limitations:
 
+⚠️ Search functionality not yet implemented  
+⚠️ Media info/descriptions not available  
+⚠️ No "More Info" buttons functional  
 ⚠️ Limited video format support  
 ⚠️ No automatic thumbnail generation  
 ⚠️ No subtitle support yet  
 ⚠️ Basic metadata handling  
-⚠️ Limited error handling for corrupted files
-
-### Planned for Beta:
-
+⚠️ Limited error handling for corrupted files### Planned for Beta:
+🔄 Search and filtering functionality  
+🔄 Media descriptions and detailed info  
+🔄 "More Info" modal dialogs  
 🔄 Enhanced video format support  
 🔄 Automatic thumbnail extraction  
 🔄 Subtitle support  

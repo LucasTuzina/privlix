@@ -23,7 +23,7 @@ Complete guide to using Privlix for organizing and watching your local media col
 
 4. **Start Watching**
    - Browse your organized collection
-   - Use search to find specific content
+   - Navigate through Movies and Series sections
    - Click any video to start watching
 
 ## 🎥 Video Playback
@@ -115,7 +115,7 @@ Media/
 - `Show.Name.1x01.ext`
 - `Show Name - S01E01.ext`
 
-## 🔍 Search & Navigation
+## 🔍 Navigation
 
 ### Home Screen
 
@@ -128,29 +128,15 @@ Media/
 **All Movies**: Alphabetically sorted movie collection
 **All Series**: Organized series with episode counts
 
-### Search Functionality
+### Navigation Bar
 
-**Search Features**:
-
-- **Instant Search**: Results update as you type
-- **Fuzzy Matching**: Finds content even with typos
-- **Multi-Field**: Searches titles, filenames, and series names
-- **Fast Performance**: Optimized for large collections
-
-**Search Tips**:
-
-- Search for partial titles: "matrix" finds "The Matrix"
-- Use series names: "breaking" finds "Breaking Bad"
-- Search works across all media types
-
-### Navigation
-
-**Navbar**:
+**Available Options**:
 
 - **Home**: Return to main dashboard
-- **Search**: Direct access to search functionality
 - **Settings**: Access preferences and folder management
 - **Language**: Switch between English and German
+
+**⚠️ Note**: Search functionality is planned for the beta version and not yet implemented in this alpha release.
 
 ## ⚙️ Settings & Preferences
 
@@ -188,12 +174,12 @@ Media/
 3. **Supported Formats**: Use MP4/MKV for best compatibility
 4. **File Sizes**: Balance quality vs. storage space
 
-### Using Search Effectively
+### Using the Library Effectively
 
-1. **Partial Searches**: Type few characters for quick results
-2. **Series Search**: Search by series name to find all episodes
-3. **Recent Searches**: Previous searches are remembered
-4. **Quick Access**: Use search for large collections
+1. **Browse Collections**: Navigate through Movies and Series sections
+2. **Continue Watching**: Easily resume from your last position
+3. **Progress Tracking**: Red progress bars show watch progress
+4. **Navigation**: Use navbar to switch between different views
 
 ## 🚨 Troubleshooting
 
@@ -247,6 +233,7 @@ Media/
 
 ### Planned Improvements
 
+- **Search Functionality**: Advanced search and filtering capabilities
 - **Thumbnails**: Automatic video thumbnail extraction
 - **Subtitles**: Support for SRT and VTT subtitle files
 - **Metadata**: Enhanced movie/series information
@@ -259,45 +246,7 @@ Media/
 - **Feature Requests**: Suggest new features via GitHub
 - **Documentation**: Check `/docs` folder for technical details
 - **Community**: Join development discussions
-  │ │ └── ...
-  │ └── Season 2/
-  │ ├── Series Name S02E01.mp4
-  │ └── ...
-  └── Another Series/
-  ├── Another Series S01E01.mkv
-  ├── Another Series S01E02.mkv
-  └── ...
 
 ```
 
-## Navigation
-
-### Home Page
-- **Hero Section**: Featured content with large preview
-- **Continue Watching**: Resume previously started videos
-- **Movies**: All movies sorted alphabetically
-- **Series**: All series sorted alphabetically
-- **Statistics**: Overview of your media library
-
-### Search
-- **Smart Search**: Fuzzy search through titles, descriptions
-- **Real-time Results**: Updates as you type
-- **Filter Options**: Movies vs. Series filtering
-
-### Settings
-- **Language Selection**: Switch between English and German
-- **Additional Settings**: More options will be added in future versions
-
-## Keyboard Shortcuts
-
-- `Ctrl/Cmd + F`: Focus search bar
-- `Escape`: Clear search or go back
-- `Enter`: Select focused item
-
-## Tips & Tricks
-
-1. **Organize Your Files**: Use consistent naming for better recognition
-2. **Folder Structure**: Separate movies and series into different folders
-3. **File Naming**: Include year in movie names for better categorization
-4. **Search**: Use partial words - the search is fuzzy and will find matches
 ```
